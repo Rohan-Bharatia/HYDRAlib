@@ -82,13 +82,17 @@ npm start
 ## Style Guide
  - Use [snake case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#snake-case) for variable and function names.
  - Use [pascal case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#pascal-case) for class names.
+ - Never use [camel case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#camel-case)
  - Use 4 spaces for indentation.
  - Write clear and consise code.
 
 ## Licensing
-The HYDRAlib is under a [MIT License](https://github.com/Rohan-Bharatia/HYDRAlib/blob/main/LICENSE)
+The HYDRAlib repository is under an [MIT License](https://github.com/Rohan-Bharatia/HYDRAlib/blob/main/LICENSE)
 By contributing to HYDRAlib, all of your contributions will be licensed under and you agree to all the terms of a [MIT License](https://github.com/Rohan-Bharatia/HYDRAlib/blob/main/LICENSE)
  - **<span style="color: red;">\*I suggest that you read the license and code of conduct thouroghly before contributing anything\*</span>**.
+
+## Security
+Read [SECURITY.md](https://github.com/Rohan-Bharatia/HYDRAlib/blob/main/.github/SECURITY.md) for information
 
 ## FAQ
  * For answers to questions about Vex Robotics go to [Vex Forum](https://www.vexforum.com/).
