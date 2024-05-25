@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.29.0)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIED True)
+set(CMAKE_CXX_EXTENTIONS False)
+
+project(HYDRAlib VERSION 1.0.0)

@@ -1,0 +1,15 @@
+BasedOnStyle: Google
+TabWidth: 4
+Language: Cpp
+UseTab: ForIndentation
+ColumnLimit: 1000
+Standard: Cpp23
+DerivePointerAlignment: false
+PointerAlignment: Left
+FixNamespaceComments: true
+ReflowComments: true
+SortIncludes: true
+AccessModifierOffset: 0
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
