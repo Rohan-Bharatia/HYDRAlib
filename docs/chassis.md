@@ -153,7 +153,8 @@ Or
 ```cpp
 Vertex start(48, 12, 720);
 Vertex end(60, 42, 180);
-chassis.follow_path(start, end);
+Path path(start, end);
+chassis.follow_path(path);
 ```
 
 ### Description
