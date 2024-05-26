@@ -18,7 +18,7 @@ If you spot a bug in any code, please create a GitHub issue on the HYDRAlib repo
 ## Suggesting Features
 Feature requests are appreciated! 
 
-Notify any tier 3 collaborators to get editor access or to push requests.
+Notify any collaborators to get editor access or to push requests.
 
 ## Contributing Code
 ### Getting Started
@@ -39,7 +39,7 @@ git commit -am 'Commit title'
 ```sh
 git push origin {my-new-feature(s)}
 ```
-6. Request a tier 3 collaborator to accept your pull request.
+6. Request a collaborator to accept your pull request.
 
 ### Pull Request Guidelines
  - Follow the coding style of the project (look at [Style Guide](#style-guide) for more info).
@@ -97,4 +97,4 @@ Read [SECURITY.md](https://github.com/Rohan-Bharatia/HYDRAlib/blob/main/.github/
 ## FAQ
  * For answers to questions about Vex Robotics go to [Vex Forum](https://www.vexforum.com/).
  * For answers to questions about the Code of Conduct go to [Contributor Covenant FAQ](https://www.contributor-covenant.org/faq/).
- * For answers to questions about HYDRAlib, contact any tier 3 contributors.
+ * For answers to questions about HYDRAlib, contact any contributors.

@@ -10,7 +10,7 @@ Thank you for helping to improve the security of HYDRAlib! Security issues are t
 ## Reporting a Vulnerability
 If you spot a vulnerability, please do the following:
 1. **Do NOT** open a public issue
-2. Contact any tier 3 contributors, include this in your email:
+2. Contact any contributors, include this in your email:
     - A clear description of the vulnerability
     - Possible steps to reproduce the issue
     - Potential impact of the vulnerability
