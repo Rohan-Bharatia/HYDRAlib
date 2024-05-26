@@ -26,21 +26,48 @@
 
 #pragma once
 
-#ifndef HYDRAlib_AUTONS_HPP
-#define HYDRAlib_AUTONS_HPP
+#ifndef HYDRAlib_CHASSIS_HPP
+#define HYDRAlib_CHASSIS_HPP
 
-#include "HYDRAlib/chassis.hpp"
+// std
+#include <array>
 
-extern HYDRAlib::Chassis chassis;
+// pros
+#include "libs/pros/include/api.h"
 
-// Auton Examples
-void drive_example();
-void turn_example();
-void drive_and_turn();
-void wait_until_change_speed();
-void swing_example();
-void combining_movements();
-void interfered_example();
-void default_constants();
+#include "movement.h"
+
+namespace HYDRAlib
+{
+    class Chassis
+    {
+    public:
+        Chassis(std::array<uint8_t, 3> left_drivetrain_ports, std::array<uint8_t, 3> right_drivetrain_ports, uint8_t IMU_port);
+
+        void calibrate(Vertex position, bool loading_animation = true);
+
+        void tank(int x, int y);
+        void arcade(int lateral, int angular, float bias = 0.5);
+
+        float get_feet_per_second()
+        { return fps; }
+
+        void move_to_vertex(Vertex position);
+
+        Vertex get_current_vertex()
+        { return current_vertex; }
+
+        void follow_path(Vertex position);
+        void follow_path(Path path);
+
+    private:
+        std::array<pros::Motor> m_left_drivetrain = NULL;
+        std::array<pros::Motor> m_right_drivetrain = NULL;
+        pros::IMU m_IMU = NULL;
+        Vertex current_vertex = NULL;
+        uint8_t m_IMU_port = NULL;
+        float fps = NULL;
+    };
+} // namespace HYDRAlib
 
 #endif

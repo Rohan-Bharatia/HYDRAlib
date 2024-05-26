@@ -29,7 +29,8 @@
 #ifndef HYDRAlib_API_H
 #define HYDRAlib_API_H
 
-// Add HYDRAlib Header Files as more get added
+#include "HYDRAlib/chassis.hpp"
+#include "HYDRAlib/movement.h"
 
 // std
 #ifdef __cplusplus
