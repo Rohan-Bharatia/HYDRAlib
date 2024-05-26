@@ -29,6 +29,8 @@
 #ifndef HYDRAlib_H
 #define HYDRAlib_H
 
+#include "include/main.h"
+
 namespace HYDRAlib
 {
     static constexpr int HYDRAlib_VERSION_MAJOR = 1;
