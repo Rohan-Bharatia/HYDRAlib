@@ -31,6 +31,7 @@
 
 #include "HYDRAlib/chassis.hpp"
 #include "HYDRAlib/movement.h"
+#include "HYDRAlib/controller.h"
 
 // std
 #ifdef __cplusplus
