@@ -27,7 +27,7 @@ Or
 Chassis chassis({1, 2, 3}, {-4, -5, -6}, 7, 600, 0.75, 3.25);
 ```
 
-### Description
+### Description / Extra Notes
 The ```left_drivetrain_ports``` and ```right_drivetrain_ports``` can have three values: ```{port, port, port}``` or two values: ```{port, NULL, port}``` depending on whether your robot has a 6 or 4 motor drivetrain.
 
 ## ```calibrate```
@@ -45,7 +45,7 @@ Vertex starting_position(30, 0, 90);
 chassis.calibrate(starting_position, true);
 ```
 
-### Description
+### Description / Extra Notes
 Calibrating the chassis is very important. This is because if this function is not called at some point, your auton will not work.
 
 ## ```tank```
@@ -62,7 +62,7 @@ void tank(int x, int y);
 chassis.tank(controller.left_joystick_Y, controller.right_joystick_Y);
 ```
 
-### Description
+### Description / Extra Notes
 Tank drive works by getting one joystick axis (Usually the left Y axis) to control the left side of the drivetrain and another axis (Usually the right Y axis) to control the right side of the drivetrain.
 
 ## ```arcade```
@@ -80,7 +80,7 @@ void arcade(int lateral, int angular, float bias = 0.5);
 chassis.arcade(controller.left_joystick_X, controller.right_joystick_Y, 0.5);
 ```
 
-### Description
+### Description / Extra Notes
 Arcade  drive works by getting one joystick axis (Usually the left Y axis) to control the lateral momentum (Forwards and backwards motion) and  another joystick axis (Usually the right X axis) to control the angular momentum (Turning motion) of the drivetrain.
 
 
@@ -94,7 +94,7 @@ float get_feet_per_second();
 chassis.get_feet_per_second();
 ```
 
-### Description
+### Description / Extra Notes
 This function returns the amount of feet per second of your robot with this formula:
 $Wheel RPM=Motor RPM*(Driven Gear Teeth / Driver Gear Teeth)$
 $Circumfrence=\Pi*Wheel Diameter$
@@ -114,7 +114,7 @@ Vertex target(60, 42, 180);
 chassis.move_to_target(target);
 ```
 
-### Description
+### Description / Extra Notes
 This function turns the robot to a desired angle and drives the bot in a staight line until its destination is reached.
 
 ## ```get_current_vertex```
@@ -127,7 +127,7 @@ Vertex get_current_vertex();
 chassis.get_current_vertex();
 ```
 
-### Description
+### Description / Extra Notes
 This function returns the robots current position.
 
 ## ```follow_path```
@@ -157,5 +157,5 @@ Path path(start, end);
 chassis.follow_path(path);
 ```
 
-### Description
+### Description / Extra Notes
 See [movement.md](https://github.com/Rohan-Bharatia/HYDRAlib/blob/main/docs/movement.md) for more information.

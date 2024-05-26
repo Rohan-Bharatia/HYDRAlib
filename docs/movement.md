@@ -22,7 +22,7 @@ struct Vertex
 Vertex vert(0, 0, 90);
 ```
 
-### Description
+### Description / Extra Notes
 Verticies covers basic geometric movement through linear motion. Verticies also support basic arithmatic logic like:
 1. Addition by another vertex.
 2. Subtraction by another vertex.
@@ -47,5 +47,5 @@ Vertex end(100, 100, 90);
 Path path(start, end);
 ```
 
-### Description
+### Description / Extra Notes
 This class covers a more complex system through bézier curves rather than straight lines.
