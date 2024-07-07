@@ -1,0 +1,7 @@
+[submodule, "libs/pros"]
+  path = "libs/pros"
+  url  = "https://github.com/purduesigbots/pros"
+
+[submodule, "libs/OkapiLib"]
+  path = "lib/OkapiLib"
+  url  = "https://github.com/OkapiLib/OkapiLib"
