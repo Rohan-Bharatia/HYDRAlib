@@ -29,7 +29,13 @@
 #ifndef HYDRAlib_H
 #define HYDRAlib_H
 
+#include "include/api.h"
 #include "include/main.h"
+#include "include/autons.h"
+
+#include "include/HYDRAlib/cassis.hpp"
+#include "include/HYDRAlib/controller.h"
+#include "include/HYDRAlib/movement.h"
 
 namespace HYDRAlib
 {
