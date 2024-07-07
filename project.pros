@@ -164,14 +164,14 @@
                 "target": "v5",
                 "user_files":
                 [
-                    "include\\main.h",
-                    "src\\main.c",
-                    "include\\main.hpp",
-                    "include\\main.hh",
+                    "HYDRAlib\\include\\main.h",
+                    "HYDRAlib\\src\\main.c",
+                    "HYDRAlib\\include\\main.hpp",
+                    "HYDRAlib\\include\\main.hh",
                     "main.cpp",
-                    "src\\main.cc",
-                    "Makefile",
-                    ".gitignore"
+                    "HYDRAlib\\src\\main.cc",
+                    "HYDRAlib\\Makefile",
+                    "HYDRAlib\\.gitignore"
                 ],
                 "version": "3.8.3"
             },
