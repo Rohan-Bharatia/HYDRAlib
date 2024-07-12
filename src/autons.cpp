@@ -29,31 +29,28 @@
 #ifndef _HYDRAlib_AUTONS_cpp_
 #define _HYDRAlib_AUTONS_cpp_
 
-#include "include/autons.hpp"
+#include "main.h"
 
-// Auton Examples
+void set_default_movement_constants()
+{}
+
+void set_close_movements_constants()
+{}
+
 void drive_example()
 {}
 
 void turn_example()
 {}
 
-void drive_and_turn()
+void arc_example()
 {}
 
-void wait_until_change_speed()
+void motion_profiling_example()
 {}
 
-void swing_example()
+void nothing()
 {}
 
-void combining_movements()
-{}
-
-void interfered_example()
-{}
-
-void default_constants()
-{}
 
 #endif // _HYDRAlib_AUTONS_cpp_

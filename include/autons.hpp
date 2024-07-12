@@ -29,18 +29,12 @@
 #ifndef _HYDRAlib_AUTONS_hpp_
 #define _HYDRAlib_AUTONS_hpp_
 
-#include "HYDRAlib/chassis.hpp"
-
-extern HYDRAlib::Chassis chassis;
-
-// Auton Examples
+void set_default_movement_constants();
+void set_close_movements_constants();
 void drive_example();
 void turn_example();
-void drive_and_turn();
-void wait_until_change_speed();
-void swing_example();
-void combining_movements();
-void interfered_example();
-void default_constants();
+void arc_example();
+void motion_profiling_example();
+void nothing();
 
 #endif // _HYDRAlib_AUTONS_hpp_
