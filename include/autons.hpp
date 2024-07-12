@@ -26,8 +26,8 @@
 
 #pragma once
 
-#ifndef HYDRAlib_AUTONS_HPP
-#define HYDRAlib_AUTONS_HPP
+#ifndef _HYDRAlib_AUTONS_hpp_
+#define _HYDRAlib_AUTONS_hpp_
 
 #include "HYDRAlib/chassis.hpp"
 
@@ -43,4 +43,4 @@ void combining_movements();
 void interfered_example();
 void default_constants();
 
-#endif
+#endif // _HYDRAlib_AUTONS_hpp_

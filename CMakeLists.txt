@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIED True)
 set(CMAKE_CXX_EXTENTIONS False)
 
-project(HYDRAlib VERSION 1.0.0)
+project(HYDRAlib VERSION 1.0.0 LANGUAGES C CXX)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 

@@ -26,8 +26,8 @@
 
 #pragma once
 
-#ifndef HYDRAlib_MAIN_H
-#define HYDRAlib_MAIN_H
+#ifndef _HYDRAlib_MAIN_h_
+#define _HYDRAlib_MAIN_h_
 
 // PROS Definitions
 #define PROS_USE_SIMPLE_NAMES
@@ -51,4 +51,4 @@ void opcontrol(void);
 }
 #endif
 
-#endif
+#endif // _HYDRAlib_MAIN_h_

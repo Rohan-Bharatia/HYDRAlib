@@ -26,14 +26,9 @@
 
 #pragma once
 
-#ifndef HYDRAlib_API_H
-#define HYDRAlib_API_H
+#ifndef _PROS_API_h_
+#define _PROS_API_h_
 
-#include "HYDRAlib/chassis.hpp"
-#include "HYDRAlib/movement.h"
-#include "HYDRAlib/controller.h"
-
-// std
 #ifdef __cplusplus
 #include <cerrno>
 #include <cmath>
@@ -43,7 +38,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#else
+#else // (NOT) __cplusplus
 #include <errno.h>
 #include <math.h>
 #include <stdbool.h>
@@ -52,16 +47,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#endif
+#endif // __cplusplus
 
-#define PROS_VERSION_MAJOR 3
-#define PROS_VERSION_MINOR 8
-#define PROS_VERSION_PATCH 3
-#define PROS_VERSION_STRING "3.8.3"
+#define PROS_VERSION_MAJOR 4
+#define PROS_VERSION_MINOR 1
+#define PROS_VERSION_PATCH 0
+#define PROS_VERSION_STRING "4.1.0"
 
-// pros
 #include "pros/adi.h"
 #include "pros/colors.h"
+#include "pros/device.h"
 #include "pros/distance.h"
 #include "pros/error.h"
 #include "pros/ext_adi.h"
@@ -79,18 +74,21 @@
 
 #ifdef __cplusplus
 #include "pros/adi.hpp"
+#include "pros/colors.hpp"
+#include "pros/device.hpp"
 #include "pros/distance.hpp"
 #include "pros/gps.hpp"
 #include "pros/imu.hpp"
 #include "pros/link.hpp"
 #include "pros/llemu.hpp"
 #include "pros/misc.hpp"
+#include "pros/motor_group.hpp"
 #include "pros/motors.hpp"
 #include "pros/optical.hpp"
 #include "pros/rotation.hpp"
 #include "pros/rtos.hpp"
 #include "pros/screen.hpp"
 #include "pros/vision.hpp"
-#endif
+#endif // __cplusplus
 
-#endif
+#endif // _PROS_API_h_

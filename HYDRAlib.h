@@ -37,11 +37,13 @@
 #include "include/HYDRAlib/controller.h"
 #include "include/HYDRAlib/movement.h"
 
+#include <cstdint>
+
 namespace HYDRAlib
 {
-    static constexpr int HYDRAlib_VERSION_MAJOR = 1;
-    static constexpr int HYDRAlib_VERSION_MINOR = 0;
-    static constexpr int HYDRAlib_VERSION_PATCH = 0;
+    static constexpr uint8_t HYDRAlib_VERSION_MAJOR = 1;
+    static constexpr uint8_t HYDRAlib_VERSION_MINOR = 0;
+    static constexpr uint8_t HYDRAlib_VERSION_PATCH = 0;
 
     static constexpr uint8_t PORT_1 = 1;
     static constexpr uint8_t PORT_2 = 2;
