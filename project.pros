@@ -170,7 +170,7 @@
                     "HYDRAlib\\include\\main.hh",
                     "main.cpp",
                     "HYDRAlib\\src\\main.cc",
-                    "HYDRAlib\\Makefile",
+                    "HYDRAlib\\CMakeLists.txt",
                     "HYDRAlib\\.gitignore"
                 ],
                 "version": "3.8.3"
