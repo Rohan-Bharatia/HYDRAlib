@@ -81,11 +81,6 @@ jobs:
       - name: Create template folder
         run: mkdir -p template/HYDRAlib/
 
-      - name: Unzip Template
-        uses: montudor/action-zip@v1.0.0
-        with:
-          args: unzip "${{ steps.template-name.outputs.name }}.zip" -d template
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
