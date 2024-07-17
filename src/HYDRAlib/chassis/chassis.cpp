@@ -41,13 +41,13 @@ namespace HYDRAlib
         ODOM_TYPE(disable_odom ? e_odom_type::NONE : determine_odom_type())
     {
 
-        for (int8_t port : imu_sensor_ports)
+        for(int8_t port : imu_sensor_ports)
             imu_sensors.push_back(pros::IMU(port));
 
-        for (int8_t port : left_motor_ports)
+        for(int8_t port : left_motor_ports)
             left_motors.push_back(pros::Motor(abs(port), Utils::is_reversed(port)));
 
-        for (int8_t i : right_motor_ports)
+        for(int8_t i : right_motor_ports)
             right_motors.push_back(pros::Motor(abs(port), Utils::is_reversed(port)));
     
         set_drive_mode(e_drive_mode::STANDBY);
@@ -287,7 +287,7 @@ namespace HYDRAlib
     {
         if(prefer_wheel_calculation)
         {
-            if (ODOM_TYPE == e_odom_type::THREE_WHEEL || ODOM_TYPE == e_odom_type::DOUBLE_PARALLEL_IMU)
+            if(ODOM_TYPE == e_odom_type::THREE_WHEEL || ODOM_TYPE == e_odom_type::DOUBLE_PARALLEL_IMU)
                 m_prefer_calculated_odom_angle = true;
             else
             {
@@ -696,7 +696,7 @@ namespace HYDRAlib
            (x_sgn_not_equal && starting_y_error_sgn == 0))
             sgn = -1;
 
-        if ((m_reversed * sgn) == -1) {
+        if((m_reversed * sgn) == -1) {
             if(target_angle_rad <= 0)
                 target_angle_rad += Utils::PI;
 
@@ -941,7 +941,7 @@ namespace HYDRAlib
         float rotated_robot_corners[2][4];
 
 
-        for (int i = 0; i < 4; i++)
+        for(int i = 0; i < 4; i++)
         {
           rotated_robot_corners[0][i] = Utils::x_rotate_point(robot_corners[0][i], robot_corners[1][i], angle, true) + robot_center_x;
           rotated_robot_corners[1][i] = Utils::y_rotate_point(robot_corners[0][i], robot_corners[1][i], angle, true) + robot_center_y;
