@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.29.0)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIED True)
 set(CMAKE_CXX_EXTENTIONS False)
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 
 project(HYDRAlib VERSION 1.0.0 LANGUAGES C CXX)
 
@@ -12,7 +15,7 @@ file(GLOB BIN "*.a")
 
 add_executable(HYDRAlib ${BIN})
 
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/dependencies/toolchain.cmake")
+set((CMAKE_TOOLCHAIN_FILE && CMAKE_FIND_ROOT_PATH) "${CMAKE_SOURCE_DIR}/dependencies/toolchain.cmake")
 
 find_package(PKG_CONFIG REQUIRED)
 pkg_check_modules(PROS REQUIRED pros)
