@@ -1,7 +1,7 @@
-[submodule, "libs/pros"]
-  path = "libs/pros"
+[submodule, "dependencies/pros"]
+  path = "dependencies/pros"
   url  = "https://github.com/purduesigbots/pros"
 
-[submodule, "libs/OkapiLib"]
+[submodule, "dependencies/OkapiLib"]
   path = "lib/OkapiLib"
   url  = "https://github.com/OkapiLib/OkapiLib"

@@ -29,15 +29,15 @@ namespace HYDRAlib
     static constexpr uint8_t HYDRAlib_VERSION_MINOR = 0;
     static constexpr uint8_t HYDRAlib_VERSION_PATCH = 0;
 
-    static constexpr uint8_t PORT_1 = 1;
-    static constexpr uint8_t PORT_2 = 2;
-    static constexpr uint8_t PORT_3 = 3;
-    static constexpr uint8_t PORT_4 = 4;
-    static constexpr uint8_t PORT_5 = 5;
-    static constexpr uint8_t PORT_6 = 6;
-    static constexpr uint8_t PORT_7 = 7;
-    static constexpr uint8_t PORT_8 = 8;
-    static constexpr uint8_t PORT_9 = 9;
+    static constexpr uint8_t PORT_1  = 1;
+    static constexpr uint8_t PORT_2  = 2;
+    static constexpr uint8_t PORT_3  = 3;
+    static constexpr uint8_t PORT_4  = 4;
+    static constexpr uint8_t PORT_5  = 5;
+    static constexpr uint8_t PORT_6  = 6;
+    static constexpr uint8_t PORT_7  = 7;
+    static constexpr uint8_t PORT_8  = 8;
+    static constexpr uint8_t PORT_9  = 9;
     static constexpr uint8_t PORT_10 = 10;
     static constexpr uint8_t PORT_11 = 11;
     static constexpr uint8_t PORT_12 = 12;

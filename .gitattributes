@@ -1,6 +1,6 @@
 * text=auto eol=lf
 
-libs/**/* -text -eol linguist-vendored
+dependencies/**/* -text -eol linguist-vendored
 
 *.png  -text -eol
 *.jpg  -text -eol

@@ -29,7 +29,7 @@ namespace HYDRAlib
     {
         dataset.push(num);
 
-        if (m_dataset.size() > m_period)
+        (m_dataset.size() > m_period)
         {
             m_sum -= m_dataset.front();
             m_dataset.pop();

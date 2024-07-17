@@ -18,7 +18,7 @@
 #define _HYDRAlib_PID_hpp_
 
 // pros
-#include "libs/pros/include/pros/rtos.h"
+#include "dependencies/pros/include/pros/rtos.h"
 
 namespace HYDRAlib
 {

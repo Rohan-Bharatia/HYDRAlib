@@ -41,8 +41,8 @@ namespace HYDRAlib
         {
             std::lock_guard<pros::Mutex> guard(pid_mutex);
 
-            if (fabs(error) < small_error)
-              time_settled += Util::DELAY_TIME;
+            (fabs(error) < small_error)
+              time_settled += Utils::DELAY_TIME;
         }
     
         return (m_time_settled > m_exit_time);
@@ -90,32 +90,25 @@ namespace HYDRAlib
     {
         std::lock_guard<pros::Mutex> guard(pid_mutex);
 
-        m_error = m_target - current;
+        m_error      = m_target - current;
         m_derivative = m_error - m_prev_error;
 
-        if (constants.kI != 0)
+        (constants.kI != 0)
         {
-          if (fabs(error) < constants.start)
+          (fabs(error) < constants.start)
             m_integral += m_error;
         
-          if (Util::sgn(m_error) != Util::sgn(m_prev_error))
+          (Utils::sgn(m_error) != Utils::sgn(m_prev_error))
             integral = 0;
         }
 
         output = (error * constants.kP) + (integral * constants.kI) + (derivative * constants.kD);
     }
 
-    void PID::reset_variables()
+    void PID::reset_variables() : m_time_settled(0), m_max_speed(0), m_output(0), m_target(0), m_error(0), m_prev_error(0),
+                                  m_integral(0)
     {
         std::lock_guard<pros::Mutex> guard(pid_mutex);
-  
-        m_time_settled = 0;
-        m_max_speed = 0;
-        m_output = 0;
-        m_target = 0;
-        m_error = 0;
-        m_prev_error = 0;
-        m_integral = 0;
     }
 
     double PID::get_output()

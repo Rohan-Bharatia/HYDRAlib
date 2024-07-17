@@ -25,7 +25,7 @@ namespace HYDRAlib::Utils
 {
     int sgn(double input)
     {
-        if (input == 0)
+        (input == 0)
             return 0;
 
         return input > 0 ? 1 : -1;
@@ -52,7 +52,7 @@ namespace HYDRAlib::Utils
     {
         double turn = target_heading - current_heading;
 
-        if (turn > PI || turn < -PI)
+        (turn > PI || turn < -PI)
           turn = -1 * sgn(turn) * (TAU - fabs(turn));
         
         return turn;
@@ -74,7 +74,7 @@ namespace HYDRAlib::Utils
     {
         x = fmod(x + 90, 360);
 
-        if (x < 0)
+        (x < 0)
             x += 360;
 
         return x - 180;
@@ -150,11 +150,11 @@ namespace HYDRAlib::Utils
 
     Vertex get_perpendicular_vector(Vertex a, Vertex b, Vertex c)
     {
-        Point ab = b - a;
-        Point bc = c - b;
+        Vertex ab = b - a;
+        Vertex bc = c - b;
 
-        Point v1 = ab / magnitude(ab);
-        Point v2 = bc / magnitude(bc);
+        Vertex v1 = ab / magnitude(ab);
+        Vertex v2 = bc / magnitude(bc);
 
         try
             return ((v1 + v2) / magnitude(v1 + v2));

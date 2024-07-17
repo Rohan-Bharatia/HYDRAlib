@@ -14,8 +14,8 @@
 
 #pragma once
 
-#ifndef _HYDRAlib_POSE_hpp_
-#define _HYDRAlib_POSE_hpp_
+#ifndef _HYDRAlib_PATH_VERTEX_hpp_
+#define _HYDRAlib_PATH_VERTEX_hpp_
 
 #pragma once
 
@@ -23,12 +23,12 @@
 
 namespace HYDRAlib
 {
-    class PathPoint : public Vertex
+    class PathVertex : public Vertex
     {
       public:
-        Path_Point();
-        Path_Point(Pose pose, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0);
-        Path_Point(double x, double y, double angle, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0);
+        PathVertex();
+        PathVertex(Pose pose, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0);
+        PathVertex(double x, double y, double angle, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0);
 
         Pose pose;
         double curvature;
@@ -39,4 +39,4 @@ namespace HYDRAlib
     };
 } // namespace HYDRAlib
 
-#endif // _HYDRAlib_POSE_hpp_
+#endif // _HYDRAlib_PATH_VERTEX_hpp_

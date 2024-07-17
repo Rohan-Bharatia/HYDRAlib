@@ -12,7 +12,7 @@ file(GLOB BIN "*.a")
 
 add_executable(HYDRAlib ${BIN})
 
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/libs/toolchain.cmake")
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/dependencies/toolchain.cmake")
 
 find_package(PKG_CONFIG REQUIRED)
 pkg_check_modules(PROS REQUIRED pros)

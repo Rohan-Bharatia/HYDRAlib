@@ -22,10 +22,10 @@
 namespace HYDRAlib
 {
     std::vector<Auton> m_autons = {};
-    int m_current_auton = 0;
+    int m_current_auton         = 0;
 
     bool enabled = true;
-    bool locked = !enabled;
+    bool locked  = !enabled;
 
     Auton::Auton(std::string name, std::string description, std::function<void()> auton_call) : name(name), description(description),
                                                                                                 run(auton_call)
@@ -40,7 +40,7 @@ namespace HYDRAlib
 
     void run_selected_auton()
     {
-        if (is_empty() || locked)
+        if(is_empty() || locked)
             return;
     
         locked = true;
@@ -52,10 +52,10 @@ namespace HYDRAlib
 
     void print_selected_auton()
     {
-        if (!enabled)
+        if(!enabled)
             return;
 
-        if (is_empty())
+        if(is_empty())
         {
             pros::screen::set_pen(COLOR_RED);
             pros::screen::print(pros::E_TEXT_MEDIUM, 6, "No autons!");
@@ -68,7 +68,7 @@ namespace HYDRAlib
             std::string description = get_current_auton_description();
             char newline_pos = description.find('\n');
 
-            if (newline_pos != std::string::npos)
+            if(newline_pos != std::string::npos)
             {
               pros::screen::print(pros::E_TEXT_MEDIUM, 7, "  %s", description.substr(0, newline_pos));
               pros::screen::print(pros::E_TEXT_MEDIUM, 8, "  %s", description.substr(newline_pos + 1));
@@ -100,10 +100,10 @@ namespace HYDRAlib
 
     void page_up()
     {
-        if (is_empty() || locked)
+        if(is_empty() || locked)
             return;
 
-        if (current_auton_page == autons.size() - 1)
+        if(current_auton_page == autons.size() - 1)
             current_auton_page = 0;
         else
             current_auton_page++;
@@ -113,10 +113,10 @@ namespace HYDRAlib
 
     void page_down()
     {
-        if (is_empty() || locked)
+        if(is_empty() || locked)
             return;
 
-        if (current_auton_page == 0)
+        if(current_auton_page == 0)
             current_auton_page = autons.size() - 1;
         else
             current_auton_page--;
@@ -124,12 +124,12 @@ namespace HYDRAlib
         printf("Selected auton %i:  %s\n", current_auton_page + 1, autons[current_auton_page].name.c_str());
     }
 
-    const int LEFT_BUTTON_X1 = 20;
-    const int LEFT_BUTTON_X2 = 100;
+    const int LEFT_BUTTON_X1  = 20;
+    const int LEFT_BUTTON_X2  = 100;
     const int RIGHT_BUTTON_X1 = 120;
     const int RIGHT_BUTTON_X2 = 200;
-    const int BUTTON_Y1 = 180;
-    const int BUTTON_Y2 = 220;
+    const int BUTTON_Y1       = 180;
+    const int BUTTON_Y2       = 220;
 
     void draw_onscreen_buttons()
     {
@@ -140,16 +140,16 @@ namespace HYDRAlib
 
     void handle_onscreen_buttons()
     {
-        if (!enabled)
+        if(!enabled)
             return;
 
         pros::screen_touch_status_s_t status = pros::screen::touch_status();
         int touch_x = status.x;
         int touch_y = status.y;
 
-        if (touch_x > LEFT_BUTTON_X1 && touch_x < LEFT_BUTTON_X2 && touch_y > BUTTON_Y1 && touch_y < BUTTON_Y2)
+        if(touch_x > LEFT_BUTTON_X1 && touch_x < LEFT_BUTTON_X2 && touch_y > BUTTON_Y1 && touch_y < BUTTON_Y2)
             page_down();
-        else if (touch_x > RIGHT_BUTTON_X1 && touch_x < RIGHT_BUTTON_X2 && touch_y > BUTTON_Y1 && touch_y < BUTTON_Y2)
+        else if(touch_x > RIGHT_BUTTON_X1 && touch_x < RIGHT_BUTTON_X2 && touch_y > BUTTON_Y1 && touch_y < BUTTON_Y2)
             page_up();
     }
 
@@ -160,16 +160,16 @@ namespace HYDRAlib
 
     void limit_switch_initialize(pros::ADIDigitalIn* up_limit, pros::ADIDigitalIn* down_limit = nullptr)
     {
-        while (true) {
-            if (limit_switch_initialized && enabled)
+        while(true) {
+            if(limit_switch_initialized && enabled)
             {
-                if (page_up_limit_switch && page_up_limit_switch->get_new_press())
+                if(page_up_limit_switch && page_up_limit_switch->get_new_press())
                   page_up();
-                else if (page_down_limit_switch && page_down_limit_switch->get_new_press())
+                else if(page_down_limit_switch && page_down_limit_switch->get_new_press())
                   page_down();
             }
 
-            pros::delay(Util::DELAY_TIME);
+            pros::delay(Utils::DELAY_TIME);
         }
     }
 
@@ -177,7 +177,7 @@ namespace HYDRAlib
     {
         printf("Initializing auton selector limit switch(es)...\n");
 
-        if (!page_up && !page_down)
+        if(!page_up && !page_down)
         {
             limit_switch_task.suspend();
             printf("No valid limit switch ports! Auton selector limit switch task suspended!");
@@ -185,7 +185,7 @@ namespace HYDRAlib
             return;
         }
 
-        if (page_up == page_down)
+        if(page_up == page_down)
             page_down = nullptr;
 
         page_up_limit_switch = page_up;
@@ -199,17 +199,17 @@ namespace HYDRAlib
 
     void controller_print_auton_task_func()
     {
-        while (true)
+        while(true)
         {
-            if (is_enabled())
+            if(is_enabled())
             {
-                if (!is_empty())
+                if(!is_empty())
                     controller.print(2, 0, "%i:   %s", get_current_auton_page(), get_current_auton_name().c_str());
                 else
                     controller.print(2, 0, "No autons loaded!");
             }
 
-            if (locked)
+            if(locked)
                 break;
 
             pros::delay(50);
@@ -218,7 +218,7 @@ namespace HYDRAlib
 
     void enable_auton_selector()
     {
-        if (enabled)
+        if(enabled)
         {
             printf("Auton selector is already enabled!\n");
 
@@ -234,7 +234,7 @@ namespace HYDRAlib
 
     void disable_auton_selector()
     {
-        if (!enabled)
+        if(!enabled)
         {
             printf("Auton selector is already disabled!\n");
             
