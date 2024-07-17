@@ -80,25 +80,11 @@ jobs:
 
       - name: Create template folder
         run: mkdir -p template/HYDRAlib/
-        
-      - name: Copy LICENSE and README.md into template
-        run: cp {LICENSE, README.md} template/HYDRAlib/  
-        
-      - name: Append GitHub link to README.md
-        run: echo "\n## [Github link](${{github.server_url}}/${{github.repository}})" >> template/HYDRAlib/README.md
-
-      - name: Fix relative Github links in README.md
-        run: perl -i -pe 's@(?<=[^/])(docs/assets/.*?)(?=[")])@${{github.server_url}}/${{github.repository}}/blob/master/$1?raw=true@g' template/HYDRAlib/README.md
 
       - name: Unzip Template
         uses: montudor/action-zip@v1.0.0
         with:
           args: unzip "${{ steps.template-name.outputs.name }}.zip" -d template
-        
-      - name: Create version file
-        run: echo $POSTFIX > template/HYDRAlib/version
-        env:
-          POSTFIX: ${{ steps.template-postfix.outputs.postfix }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
