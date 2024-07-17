@@ -22,6 +22,7 @@
 #include "utils/utils.hpp"
 #include "subsystems/flywheel.hpp"
 #include "subsystems/intake.hpp"
+#include "api.h"
 
 // pros
 #include "dependencies/pros/include/pros/error.h"
@@ -45,10 +46,16 @@ namespace HYDRAlib
             imu_sensors.push_back(pros::IMU(port));
 
         for(int8_t port : left_motor_ports)
+        {
             left_motors.push_back(pros::Motor(abs(port), Utils::is_reversed(port)));
+            Priv::motor_count++;
+        }
 
         for(int8_t i : right_motor_ports)
+        {
             right_motors.push_back(pros::Motor(abs(port), Utils::is_reversed(port)));
+            Priv::motor_count++;
+        }
     
         set_drive_mode(e_drive_mode::STANDBY);
         set_odom_position(0, 0, 0);

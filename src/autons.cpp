@@ -19,26 +19,28 @@
 
 #include "main.h"
 
-void set_default_movement_constants()
-{}
-
-void set_close_movements_constants()
-{}
-
-void drive_example()
-{}
-
-void turn_example()
-{}
-
-void arc_example()
-{}
-
-void motion_profiling_example()
-{}
-
-void nothing()
-{}
-
+namespace HYDRAlib
+{
+    void set_default_movement_constants()
+    {}
+    
+    void set_close_movements_constants()
+    {}
+    
+    void drive_example()
+    {}
+    
+    void turn_example()
+    {}
+    
+    void arc_example()
+    {}
+    
+    void motion_profiling_example()
+    {}
+    
+    void nothing()
+    {}
+} // namespace HYDRAlib
 
 #endif // _HYDRAlib_AUTONS_cpp_

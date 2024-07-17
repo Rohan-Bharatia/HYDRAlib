@@ -80,4 +80,14 @@
 #include "pros/vision.hpp"
 #endif // __cplusplus
 
+namespace HYDRAlib
+{
+    bool running = true;
+
+    namespace Priv
+    {
+        uint8_t motor_count = 0;
+    } // namespace Priv
+}
+
 #endif // _PROS_API_h_

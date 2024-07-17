@@ -21,21 +21,23 @@
 #include "include/main.h"
 #include "include/autons.h"
 
-#include <cstdint>
-
 #ifdef _V5RC
 
 printf("Welcome to the Vex v5 Robotics Competition, Thank you for using HYDRAlib!");
+
+HYDRAlib::limit_motors(8);
 
 #elif _VURC
 
 printf("Welcome to the Vex Uni Robotics Competition, Thank you for using HYDRAlib!");
 
+HYDRAlib::limit_motors(16);
+
 #else
 
 #error This Version of HYDRAlib is either undefined or unsupported, either use 'V5RC' or 'VURC'
 
-#endif // V5RC
+#endif // _V5RC
 
 namespace HYDRAlib
 {
@@ -72,6 +74,15 @@ namespace HYDRAlib
     static constexpr char PORT_F = 'F';
     static constexpr char PORT_G = 'G';
     static constexpr char PORT_H = 'H';
+
+    void limit_motors(uint8_t max)
+    {
+        if(Priv::motor_count > max)
+        {
+            printf("Your robot has exceeded the maximum limit of wattage (%i-Watts)", max * 11);
+            running = false;
+        }
+    }
 } // namespace HYDRAlib
 
 #endif // _HYDRAlib_h_

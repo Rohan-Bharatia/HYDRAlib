@@ -21,8 +21,8 @@ find_package(PKG_CONFIG REQUIRED)
 pkg_check_modules(PROS REQUIRED pros)
 
 add_definitions(-D_GNU_SOURCE)
-add_definitions(-DV5RC)
-add_definitions(-DVURC)
+add_definitions(-D_V5RC)
+add_definitions(-D_VURC)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++23 -fPIC")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu23 -fPIC")
