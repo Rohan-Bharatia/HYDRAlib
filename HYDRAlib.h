@@ -23,6 +23,20 @@
 
 #include <cstdint>
 
+#ifdef _V5RC
+
+printf("Welcome to the Vex v5 Robotics Competition, Thank you for using HYDRAlib!");
+
+#elif _VURC
+
+printf("Welcome to the Vex Uni Robotics Competition, Thank you for using HYDRAlib!");
+
+#else
+
+#error This Version of HYDRAlib is either undefined or unsupported, either use 'V5RC' or 'VURC'
+
+#endif // V5RC
+
 namespace HYDRAlib
 {
     static constexpr uint8_t HYDRAlib_VERSION_MAJOR = 1;
