@@ -1,12 +1,14 @@
-name: PROS build
+name: PROS Build
 
 on:
   push:
     branches:
       - "main"
+
   pull_request:
     branches:
       - "main"
+
   workflow_dispatch:
 
 jobs:
@@ -14,38 +16,96 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get short SHA
+        id: short-sha
+        run: |
+          if [ $ACTION = opened ]; then
+              # we have to get the head sha directly from the pr api, because github silly ig
+              echo "then"
+              sha=$(wget -O- --quiet https://api.github.com/repos/Rohan-Bharatia/HYDRAlib/pulls/$PR_NUM | jq -r .head.sha | head -c 6)
+          else
+              echo "else"
+              sha=$(echo $SHA | head -c 6)
+          fi
+          echo "sha=$sha" >> $GITHUB_OUTPUT
+        env:
+          SHA:    ${{ github.event.after }}
+          ACTION: ${{ github.event.action }}
+          PR_NUM: ${{ github.event.number }}
+
+      - name: Set short SHA
+        run: echo $SHA
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+
       - name: Install ARM Toolchain
         uses: fiam/arm-none-eabi-gcc@v1
         with:
-          release: '9-2019-q4'
+          release: "10-2020-q4"
 
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.12
+          python-version: 3.11
 
-      - name: Install Dependencies
-        run: |
-          pip install click==6.7
-          pip install pyserial
-          pip install cachetools
-          pip install requests
-          pip install tabulate
-          pip install jsonpickle
-          pip install semantic-version
-          pip install colorama
-          pip install pyzmq
-          pip install cobs
-          pip install scan-build==2.0.13
+      - name: PIP Installer
+        uses: BSFishy/pip-action@v1
+        with:
+          packages: pros-cli
 
-      - name: Install PROS CLI
-        run: pip install https://github.com/purduesigbots/pros-cli/releases/download/3.1.4/pros_cli_v5-3.1.4-py3-none-any.whl
-
-      - name: Testing PROS Install 
-        run: prosv5 --version
+      - name: Testing PROS Install
+        run: pros --version
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2.3.4
 
-      - name: Build PROS Project  
-        run: prosv5 make clean all
+      - name: Get Template Postfix
+        id: template-postfix
+        run: |
+          echo postfix="$VER+$SHA" >> "$GITHUB_OUTPUT"
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+          VER: ${{ steps.version.outputs.version }}
+
+      - name: Get Template Name
+        id: template-name
+        run: |
+          echo name=$TEMPLATE_NAME@$POSTFIX >> "$GITHUB_OUTPUT"
+        env:
+          POSTFIX:       ${{ steps.template-postfix.outputs.postfix }}
+          TEMPLATE_NAME: ${{ github.event.repository.name }}
+      
+      - name: Build PROS Project
+        run: make clean quick -j
+
+      - name: Create HYDRAlib template
+        run: pros make template
+
+      - name: Create template folder
+        run: mkdir -p template/HYDRAlib/
+        
+      - name: Copy LICENSE and README.md into template
+        run: cp {LICENSE, README.md} template/HYDRAlib/  
+        
+      - name: Append GitHub link to README.md
+        run: echo "\n## [Github link](${{github.server_url}}/${{github.repository}})" >> template/HYDRAlib/README.md
+
+      - name: Fix relative Github links in README.md
+        run: perl -i -pe 's@(?<=[^/])(docs/assets/.*?)(?=[")])@${{github.server_url}}/${{github.repository}}/blob/master/$1?raw=true@g' template/HYDRAlib/README.md
+
+      - name: Unzip Template
+        uses: montudor/action-zip@v1.0.0
+        with:
+          args: unzip "${{ steps.template-name.outputs.name }}.zip" -d template
+        
+      - name: Create version file
+        run: echo $POSTFIX > template/HYDRAlib/version
+        env:
+          POSTFIX: ${{ steps.template-postfix.outputs.postfix }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.template-name.outputs.name }}
+          path: "template/*"
+          retention-days: 89
