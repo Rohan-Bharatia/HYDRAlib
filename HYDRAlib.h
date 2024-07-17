@@ -21,17 +21,27 @@
 #include "include/main.h"
 #include "include/autons.h"
 
+#define motor_clamp(max)                                                                              \
+    do                                                                                                \
+    {                                                                                                 \
+        if(Priv::motor_count > max)                                                                   \
+        {                                                                                             \
+            printf("Your robot has exceeded the maximum legal wattage (%i-Watts) allowed", max * 11); \
+            running = false;                                                                          \
+        }                                                                                             \
+    } while(0)
+
 #ifdef _V5RC
 
 printf("Welcome to the Vex v5 Robotics Competition, Thank you for using HYDRAlib!");
 
-HYDRAlib::limit_motors(8);
+motor_clamp(8);
 
 #elif _VURC
 
 printf("Welcome to the Vex Uni Robotics Competition, Thank you for using HYDRAlib!");
 
-HYDRAlib::limit_motors(16);
+motor_clamp(16);
 
 #else
 
@@ -74,15 +84,6 @@ namespace HYDRAlib
     static constexpr char PORT_F = 'F';
     static constexpr char PORT_G = 'G';
     static constexpr char PORT_H = 'H';
-
-    void limit_motors(uint8_t max)
-    {
-        if(Priv::motor_count > max)
-        {
-            printf("Your robot has exceeded the maximum limit of wattage (%i-Watts)", max * 11);
-            running = false;
-        }
-    }
 } // namespace HYDRAlib
 
 #endif // _HYDRAlib_h_
