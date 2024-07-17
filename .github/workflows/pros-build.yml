@@ -74,9 +74,6 @@ jobs:
         env:
           POSTFIX:       ${{ steps.template-postfix.outputs.postfix }}
           TEMPLATE_NAME: ${{ github.event.repository.name }}
-      
-      - name: Build PROS Project
-        run: make clean quick -j
 
       - name: Create HYDRAlib template
         run: pros make template
