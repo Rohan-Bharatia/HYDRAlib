@@ -1,5 +1,6 @@
 # HYDRAlib
 <img src="assets/logo.jpg" alt="logo.jpg"><img>
+![ GitHub Workflow Status ](https://img.shields.io/github/workflow/status/Rohan-Bharatia/HYDRAlib/CI?label=build) 
 
 ## What is HYDRAlib?
 HYDRAlib is a robotics programming library for Vex Robotics Competition robots, with support for V5 and Vex U robots that uses PROS (Programable Robotics Operating System).
