@@ -57,6 +57,8 @@
 extern Chassis chassis;
 inline pros::Mutex mutex;
 inline pros::Controller controller(pros::E_CONTROLLER_MASTER);
+inline pros::ADIDigitalIn auton_limit_switch_up({21, 'F'});
+inline pros::ADIDigitalIn auton_limit_switch_down({21, 'E'});
 
 #ifdef __cplusplus
 

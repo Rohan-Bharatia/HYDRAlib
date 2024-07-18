@@ -19,7 +19,7 @@
 
 #include "include/api.h"
 #include "include/main.h"
-#include "include/autons.h"
+#include "include/autons.hpp"
 
 #define motor_clamp(max)                                                                              \
     do                                                                                                \
@@ -45,7 +45,7 @@ motor_clamp(16);
 
 #else
 
-#error This Version of HYDRAlib is either undefined or unsupported, either use 'V5RC' or 'VURC'
+#error This Version of HYDRAlib is either undefined or unsupported, either use '_V5RC' or '_VURC'
 
 #endif // _V5RC
 
