@@ -75,3 +75,6 @@ void opcontrol()
 }
 ```
 <span color="red">**Warning**</span>: If these steps aren't followed exactly, then the code will not run properly.
+
+## Documentation
+Read the ```/templates/v5``` or ```templates/vex U``` folders for information on how to use the HYDRAlib features to the best of their ability.
