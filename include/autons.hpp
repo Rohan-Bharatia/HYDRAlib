@@ -25,7 +25,6 @@ namespace HYDRAlib
     void turn_example();
     void arc_example();
     void motion_profiling_example();
-    void nothing();
 } // namespace HYDRAlib
 
 #endif // _HYDRAlib_AUTONS_hpp_

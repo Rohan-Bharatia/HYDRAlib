@@ -90,12 +90,12 @@ namespace HYDRAlib
     template<size_t N>
     double Bezier<N>::curvature(double t) const
     {
-        Point d1 = first_derivative(t);
+        Vertex d1 = first_derivative(t);
   
         if(Utils::magnitude(d1) == 0)
             return 0;
 
-        return (Utils::determinant(d1, second_derivative(t))) / (std::pow(Util::magnitude(d1), 3));
+        return (Utils::determinant(d1, second_derivative(t))) / (std::pow(Utils::magnitude(d1), 3));
     }
 
     template<size_t N>

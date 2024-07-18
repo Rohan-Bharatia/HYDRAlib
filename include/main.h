@@ -24,19 +24,58 @@
 #include "api.h"
 #include "autons.hpp"
 
+#include "auton/auton-selector.hpp"
+
+#include "chassis/chassis.hpp"
+#include "chassis/motion/motion-profiling.hpp"
+#include "chassis/motion/pure-pursuit.hpp"
+#include "chassis/odometry/tracking-wheel.hpp"
+
+#include "path-generation/path-generation.hpp"
+#include "path-generation/bezier.hpp"
+
+#include "subsystems/four-bar.hpp"
+#include "subsystems/intake.hpp"
+#include "subsystems/piston.hpp"
+
+#include "utils/vertex/path-vertex.hpp"
+#include "utils/vertex/vertex.hpp"
+#include "utils/vertex/pose.hpp"
+#include "utils/PID.hpp"
+#include "utils/PIDF.hpp"
+#include "utils/simple-moving-avg.hpp"
+#include "utils/utils.hpp"
+
+// std
+#include <string>
+#include <vector>
+#include <mutex>
+#include <algorithm>
+#include <atomic>
+#include <utility>
+
+extern Chassis chassis;
+inline pros::Mutex mutex;
+inline pros::Controller controller(pros::E_CONTROLLER_MASTER);
+
 #ifdef __cplusplus
-extern "C" {
-#endif
+
+extern "C"
+{
+
+#endif // __cplusplus
 
 // Competition functions
-void autonomous(void);
 void initialize(void);
 void disabled(void);
 void competition_initialize(void);
+void autonomous(void);
 void opcontrol(void);
 
 #ifdef __cplusplus
+
 }
-#endif
+
+#endif // __cplusplus
 
 #endif // _HYDRAlib_MAIN_h_

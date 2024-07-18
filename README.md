@@ -14,23 +14,23 @@ To create an empty template of this project, download the GitHub repository, and
 #include "HYDRAlib.h"
 using namespace HYDRAlib;
 
-void initialize(void)
+void initialize()
 {
     set_default_movement_constants();
 }
 
-void disabled(void)
+void disabled()
 {}
 
-void competition_initialize(void)
+void competition_initialize()
 {}
 
-void autonomous(void)
+void autonomous()
 {
     AutonSelector::run_selected_auton();
 }
 
-void opcontrol(void)
+void opcontrol()
 {
     AutonSelector::disable_auton_selector();
 
@@ -47,23 +47,23 @@ If you are in the Vex U Robotics Competition, copy/paste this code:
 #include "HYDRAlib.h"
 using namespace HYDRAlib;
 
-void initialize(void)
+void initialize()
 {
     set_default_movement_constants();
 }
 
-void disabled(void)
+void disabled()
 {}
 
-void competition_initialize(void)
+void competition_initialize()
 {}
 
-void autonomous(void)
+void autonomous()
 {
     AutonSelector::run_selected_auton();
 }
 
-void opcontrol(void)
+void opcontrol()
 {
     AutonSelector::disable_auton_selector();
 

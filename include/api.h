@@ -27,7 +27,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#else // (NOT) __cplusplus
+#else
 #include <errno.h>
 #include <math.h>
 #include <stdbool.h>

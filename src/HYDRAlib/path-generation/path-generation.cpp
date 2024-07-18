@@ -441,9 +441,9 @@ namespace HYDRAlib::PathGeneration
         case 0:
             if(path.size() == 2)
             {
-                magnitude_v0 = tangent_magnitude * Util::magnitude(path.at(curr + 1) - path.at(curr));
+                magnitude_v0 = tangent_magnitude * Utils::magnitude(path.at(curr + 1) - path.at(curr));
                 v0           = Vertex(std::sin(initial_angle), std::cos(initial_angle)) * magnitude_v0;
-                v1           = ((path.at(curr + 1) - path.at(curr)) / (Util::magnitude(path.at(curr + 1) - path.at(curr)))) * magnitude_v0;
+                v1           = ((path.at(curr + 1) - path.at(curr)) / (Utils::magnitude(path.at(curr + 1) - path.at(curr)))) * magnitude_v0;
                 acc0         = -6 * path.at(curr) - 4 * v0 - 2 * v1 + 6 * path.at(curr + 1);
                 acc1         = 6 * path.at(curr) + 2 * v0 + 4 * v1 - 6 * path.at(curr + 1);
 
@@ -453,24 +453,24 @@ namespace HYDRAlib::PathGeneration
 
                 if(curr + 2 == path.size() - 1)
                 {
-                    magnitude_vD = tangent_magnitude * Util::magnitude(path.at(curr + 2) - path.at(curr + 1));
-                    vD           = (path.at(curr + 2) - path.at(curr + 1)) / (Util::magnitude(path.at(curr + 2) - path.at(curr + 1))) * magnitude_vD;
+                    magnitude_vD = tangent_magnitude * Utils::magnitude(path.at(curr + 2) - path.at(curr + 1));
+                    vD           = (path.at(curr + 2) - path.at(curr + 1)) / (Utils::magnitude(path.at(curr + 2) - path.at(curr + 1))) * magnitude_vD;
                 }
                 else
                 {
-                    magnitude_vD = tangent_magnitude * std::min(Util::magnitude(path.at(curr + 2) - path.at(curr + 1)), Util::magnitude(path.at(curr + 3) - path.at(curr + 2)));
-                    vD           = Util::get_perpendicular_vector(path.at(curr + 1), path.at(curr + 2), path.at(curr + 3)) * magnitude_vD;
+                    magnitude_vD = tangent_magnitude * std::min(Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)), Utils::magnitude(path.at(curr + 3) - path.at(curr + 2)));
+                    vD           = Utils::get_perpendicular_vector(path.at(curr + 1), path.at(curr + 2), path.at(curr + 3)) * magnitude_vD;
                 }
 
-                magnitude_v0 = tangent_magnitude * Util::magnitude(path.at(curr + 1) - path.at(curr));
-                magnitude_v1 = tangent_magnitude * std::min(Util::magnitude(path.at(curr + 1) - path.at(curr)), Util::magnitude(path.at(curr + 2) - path.at(curr + 1)));
+                magnitude_v0 = tangent_magnitude * Utils::magnitude(path.at(curr + 1) - path.at(curr));
+                magnitude_v1 = tangent_magnitude * std::min(Utils::magnitude(path.at(curr + 1) - path.at(curr)), Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)));
                 v0           = Vertex(sin(initial_angle), cos(initial_angle)) * magnitude_v0;
-                v1           = Util::get_perpendicular_vector(path.at(curr), path.at(curr + 1), path.at(curr + 2)) * magnitude_v1;
+                v1           = Utils::get_perpendicular_vector(path.at(curr), path.at(curr + 1), path.at(curr + 2)) * magnitude_v1;
 
-                alpha = (Util::magnitude(path.at(curr + 2) - path.at(curr + 1))) /
-                        (Util::magnitude(path.at(curr + 1) - path.at(curr)) + Util::magnitude(path.at(curr + 2) - path.at(curr + 1)));
-                beta  = (Util::magnitude(path.at(curr + 1) - path.at(curr))) /
-                        (Util::magnitude(path.at(curr + 1) - path.at(curr)) + Util::magnitude(path.at(curr + 2) - path.at(curr + 1)));
+                alpha = (Utils::magnitude(path.at(curr + 2) - path.at(curr + 1))) /
+                        (Utils::magnitude(path.at(curr + 1) - path.at(curr)) + Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)));
+                beta  = (Utils::magnitude(path.at(curr + 1) - path.at(curr))) /
+                        (Utils::magnitude(path.at(curr + 1) - path.at(curr)) + Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)));
                 acc0  = -6 * path.at(curr) - 4 * v0 - 2 * v1 + 6 * path.at(curr + 1);
                 acc1  = alpha * (6 * path.at(curr) + 2 * v0 + 4 * v1 - 6 * path.at(curr + 1)) + beta
                               * (-6 * path.at(curr + 1) - 4 * v1 - 2 * vD + 6 * path.at(curr + 2));
@@ -481,24 +481,24 @@ namespace HYDRAlib::PathGeneration
         case path.size() - 2:
             if(curr - 1 == 0)
             {
-                magnitude_vA = tangent_magnitude * Util::magnitude(path.at(curr) - path.at(curr - 1));
+                magnitude_vA = tangent_magnitude * Utils::magnitude(path.at(curr) - path.at(curr - 1));
                 vA           = Vertex(std::sin(initial_angle), std::cos(initial_angle)) * magnitude_vA;
             }
             else
             {
-                magnitude_vA = tangent_magnitude * std::min(Util::magnitude(path.at(curr - 2) - path.at(curr - 1)), Util::magnitude(path.at(curr) - path.at(curr - 1)));
-                vA           = Util::get_perpendicular_vector(path.at(curr - 2), path.at(curr - 1), path.at(curr)) * magnitude_vA;
+                magnitude_vA = tangent_magnitude * std::min(Utils::magnitude(path.at(curr - 2) - path.at(curr - 1)), Utils::magnitude(path.at(curr) - path.at(curr - 1)));
+                vA           = Utils::get_perpendicular_vector(path.at(curr - 2), path.at(curr - 1), path.at(curr)) * magnitude_vA;
             }
             
-            magnitude_v0 = tangent_magnitude * std::min(Util::magnitude(path.at(curr) - path.at(curr - 1)), Util::magnitude(path.at(curr + 1) - path.at(curr)));
-            magnitude_v1 = tangent_magnitude * Util::magnitude(path.at(curr + 1) - path.at(curr));
-            v0           = Util::get_perpendicular_vector(path.at(curr - 1), path.at(curr), path.at(curr + 1)) * magnitude_v0;
-            v1           = (path.at(curr + 1) - path.at(curr)) / (Util::magnitude(path.at(curr + 1) - path.at(curr))) * magnitude_v1;
+            magnitude_v0 = tangent_magnitude * std::min(Utils::magnitude(path.at(curr) - path.at(curr - 1)), Utils::magnitude(path.at(curr + 1) - path.at(curr)));
+            magnitude_v1 = tangent_magnitude * Utils::magnitude(path.at(curr + 1) - path.at(curr));
+            v0           = Utils::get_perpendicular_vector(path.at(curr - 1), path.at(curr), path.at(curr + 1)) * magnitude_v0;
+            v1           = (path.at(curr + 1) - path.at(curr)) / (Utils::magnitude(path.at(curr + 1) - path.at(curr))) * magnitude_v1;
 
-            alpha = (Util::magnitude(path.at(curr + 1) - path.at(curr))) /
-                    (Util::magnitude(path.at(curr) - path.at(curr - 1)) + Util::magnitude(path.at(curr + 1) - path.at(curr)));
-            beta  = (Util::magnitude(path.at(curr) - path.at(curr - 1))) /
-                    (Util::magnitude(path.at(curr) - path.at(curr - 1)) + Util::magnitude(path.at(curr + 1) - path.at(curr)));
+            alpha = (Utils::magnitude(path.at(curr + 1) - path.at(curr))) /
+                    (Utils::magnitude(path.at(curr) - path.at(curr - 1)) + Utils::magnitude(path.at(curr + 1) - path.at(curr)));
+            beta  = (Utils::magnitude(path.at(curr) - path.at(curr - 1))) /
+                    (Utils::magnitude(path.at(curr) - path.at(curr - 1)) + Utils::magnitude(path.at(curr + 1) - path.at(curr)));
             acc0  = alpha * (6 * path.at(curr - 1) + 2 * vA + 4 * v0 - 6 * path.at(curr)) + beta
                           * (-6 * path.at(curr) - 4 * v0 - 2 * v1 + 6 * path.at(curr + 1));
             acc1  = 6 * path.at(curr) + 2 * v0 + 4 * v1 - 6 * path.at(curr + 1);
@@ -508,37 +508,37 @@ namespace HYDRAlib::PathGeneration
         default:
             if(curr - 1 == 0)
             {
-                magnitude_vA = tangent_magnitude * Util::magnitude(path.at(curr) - path.at(curr - 1));
+                magnitude_vA = tangent_magnitude * Utils::magnitude(path.at(curr) - path.at(curr - 1));
                 vA           = Vertex(std::sin(initial_angle), std::cos(initial_angle)) * magnitude_vA;
             } else {
-                magnitude_vA = tangent_magnitude * std::min(Util::magnitude(path.at(curr - 2) - path.at(curr - 1)), Util::magnitude(path.at(curr) - path.at(curr - 1)));
-                vA           = Util::get_perpendicular_vector(path.at(curr - 2), path.at(curr - 1), path.at(curr)) * magnitude_vA;
+                magnitude_vA = tangent_magnitude * std::min(Utils::magnitude(path.at(curr - 2) - path.at(curr - 1)), Utils::magnitude(path.at(curr) - path.at(curr - 1)));
+                vA           = Utils::get_perpendicular_vector(path.at(curr - 2), path.at(curr - 1), path.at(curr)) * magnitude_vA;
             }
             
             if(curr + 2 == path.size() - 1)
             {
-                magnitude_vD = tangent_magnitude * Util::magnitude(path.at(curr + 2) - path.at(curr + 1));
-                vD           = (path.at(curr + 2) - path.at(curr + 1)) / (Util::magnitude(path.at(curr + 2) - path.at(curr + 1))) * magnitude_vD;
+                magnitude_vD = tangent_magnitude * Utils::magnitude(path.at(curr + 2) - path.at(curr + 1));
+                vD           = (path.at(curr + 2) - path.at(curr + 1)) / (Utils::magnitude(path.at(curr + 2) - path.at(curr + 1))) * magnitude_vD;
             }
             else
             {
-                magnitude_vD = tangent_magnitude * std::min(Util::magnitude(path.at(curr + 2) - path.at(curr + 1)), Util::magnitude(path.at(curr + 3) - path.at(curr + 2)));
-                vD           = Util::get_perpendicular_vector(path.at(curr + 1), path.at(curr + 2), path.at(curr + 3)) * magnitude_vD;
+                magnitude_vD = tangent_magnitude * std::min(Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)), Utils::magnitude(path.at(curr + 3) - path.at(curr + 2)));
+                vD           = Utils::get_perpendicular_vector(path.at(curr + 1), path.at(curr + 2), path.at(curr + 3)) * magnitude_vD;
             }
 
-            magnitude_v0 = tangent_magnitude * std::min(Util::magnitude(path.at(curr) - path.at(curr - 1)), Util::magnitude(path.at(curr + 1) - path.at(curr)));
-            magnitude_v1 = tangent_magnitude * std::min(Util::magnitude(path.at(curr + 1) - path.at(curr)), Util::magnitude(path.at(curr + 2) - path.at(curr + 1)));
-            v0           = Util::get_perpendicular_vector(path.at(curr - 1), path.at(curr), path.at(curr + 1)) * magnitude_v0;
-            v1           = Util::get_perpendicular_vector(path.at(curr), path.at(curr + 1), path.at(curr + 2)) * magnitude_v1;
+            magnitude_v0 = tangent_magnitude * std::min(Utils::magnitude(path.at(curr) - path.at(curr - 1)), Utils::magnitude(path.at(curr + 1) - path.at(curr)));
+            magnitude_v1 = tangent_magnitude * std::min(Utils::magnitude(path.at(curr + 1) - path.at(curr)), Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)));
+            v0           = Utils::get_perpendicular_vector(path.at(curr - 1), path.at(curr), path.at(curr + 1)) * magnitude_v0;
+            v1           = Utils::get_perpendicular_vector(path.at(curr), path.at(curr + 1), path.at(curr + 2)) * magnitude_v1;
 
-            alpha0 = (Util::magnitude(path.at(curr + 1) - path.at(curr))) /
-                     (Util::magnitude(path.at(curr) - path.at(curr - 1)) + Util::magnitude(path.at(curr + 1) - path.at(curr)));
-            beta0  = (Util::magnitude(path.at(curr) - path.at(curr - 1))) /
-                     (Util::magnitude(path.at(curr) - path.at(curr - 1)) + Util::magnitude(path.at(curr + 1) - path.at(curr)));
-            alpha1 = (Util::magnitude(path.at(curr + 2) - path.at(curr + 1))) /
-                     (Util::magnitude(path.at(curr + 1) - path.at(curr)) + Util::magnitude(path.at(curr + 2) - path.at(curr + 1)));
-            beta1  = (Util::magnitude(path.at(curr + 1) - path.at(curr))) /
-                     (Util::magnitude(path.at(curr + 1) - path.at(curr)) + Util::magnitude(path.at(curr + 2) - path.at(curr + 1)));
+            alpha0 = (Utils::magnitude(path.at(curr + 1) - path.at(curr))) /
+                     (Utils::magnitude(path.at(curr) - path.at(curr - 1)) + Utils::magnitude(path.at(curr + 1) - path.at(curr)));
+            beta0  = (Utils::magnitude(path.at(curr) - path.at(curr - 1))) /
+                     (Utils::magnitude(path.at(curr) - path.at(curr - 1)) + Utils::magnitude(path.at(curr + 1) - path.at(curr)));
+            alpha1 = (Utils::magnitude(path.at(curr + 2) - path.at(curr + 1))) /
+                     (Utils::magnitude(path.at(curr + 1) - path.at(curr)) + Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)));
+            beta1  = (Utils::magnitude(path.at(curr + 1) - path.at(curr))) /
+                     (Utils::magnitude(path.at(curr + 1) - path.at(curr)) + Utils::magnitude(path.at(curr + 2) - path.at(curr + 1)));
             acc0   = alpha0 * (6 * path.at(curr - 1) + 2 * vA + 4 * v0 - 6 * path.at(curr)) + beta0
                             * (-6 * path.at(curr) - 4 * v0 - 2 * v1 + 6 * path.at(curr + 1));
             acc1   = alpha1 * (6 * path.at(curr) + 2 * v0 + 4 * v1 - 6 * path.at(curr + 1)) + beta1
