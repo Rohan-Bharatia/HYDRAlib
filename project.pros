@@ -43,7 +43,7 @@
                     "dependencies\\pros\\include\\pros\\adi.h",
                     "dependencies\\pros\\include\\display\\lv_draw\\lv_draw.h",
                     "dependencies\\pros\\include\\pros\\colors.hpp",
-                    "dependencies\\pros\\include\\display\\licence.txt",
+                    "dependencies\\pros\\include\\display\\LICENSE.txt",
                     "dependencies\\pros\\include\\display\\lv_draw\\lv_draw_img.h",
                     "dependencies\\pros\\include\\display\\lv_fonts\\lv_fonts.mk",
                     "dependencies\\pros\\include\\display\\lv_draw\\lv_draw_rect.h",
