@@ -26,7 +26,7 @@
     {                                                                                                 \
         if(Priv::motor_count > max)                                                                   \
         {                                                                                             \
-            printf("Your robot has exceeded the maximum legal wattage (%i-Watts) allowed", max * 11); \
+            printf("Your robot has exceeded the maximum legal wattage (%i Watts) allowed", max * 11); \
             running = false;                                                                          \
         }                                                                                             \
     } while(0)

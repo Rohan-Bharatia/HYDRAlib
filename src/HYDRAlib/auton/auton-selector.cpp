@@ -160,7 +160,8 @@ namespace HYDRAlib
 
     void limit_switch_initialize(pros::ADIDigitalIn* up_limit, pros::ADIDigitalIn* down_limit = nullptr)
     {
-        while(true) {
+        while(true)
+        {
             if(limit_switch_initialized && enabled)
             {
                 if(page_up_limit_switch && page_up_limit_switch->get_new_press())

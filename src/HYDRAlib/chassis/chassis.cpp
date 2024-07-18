@@ -249,7 +249,7 @@ namespace HYDRAlib
         Vertex current_vertex = Vertex(get_pose().x, get_pose().y);
         path.insert(path.begin(), current_vertex);
 
-        std::vector<PathVertex> trajectory = PathGeneration::calculate_trajectory(PathGeneration::generate_path(path, Utils::to_deg(Utils::normalize(get_pose().angle)), final_angle, tangent_magnitude), v, a, w);
+        std::vector<PathVertex> trajectory = PathGeneration::trajectory<4>({PathGeneration::generate_path<4>({path, Utils::to_deg(Utils::normalize(get_pose().angle)), final_angle, tangent_magnitude}), v, a, w});
 
         path_traverser.starting_position = (chassis.left_tracker.get_value_inches() + chassis.right_tracker.get_value_inches()) / 2;
         path_traverser.set_trajectory(trajectory);
@@ -262,7 +262,7 @@ namespace HYDRAlib
         Pose current_vertex = Pose(get_pose().x, get_pose().y, Utils::to_deg(Utils::normalize(get_pose().angle)));
         path.insert(path.begin(), current_vertex);
 
-        std::vector<PathVertex> trajectory = PathGeneration::calculate_trajectory(PathGeneration::generate_path(path, tangent_magnitude), v, a, w);
+        std::vector<PathVertex> trajectory = PathGeneration::trajectory<4>({PathGeneration::generate_path<2>({path, tangent_magnitude}), v, a, w});
 
         path_traverser.starting_position = (chassis.left_tracker.get_value_inches() + chassis.right_tracker.get_value_inches()) / 2;
         path_traverser.set_trajectory(trajectory);
@@ -439,7 +439,8 @@ namespace HYDRAlib
 
         double total_rotation = 0;
 
-        for(pros::Imu imu : imu_sensors) {
+        for(pros::Imu imu : imu_sensors)
+        {
             double rotation = imu.get_rotation();
   
             if(rotation == PROS_ERR_F)
@@ -649,7 +650,7 @@ namespace HYDRAlib
                 robot_pose.x     += Utils::x_rotate_vertex(local_x, local_y, alpha, false);
                 robot_pose.y     += Utils::y_rotate_vertex(local_x, local_y, alpha, false);
                 robot_pose.angle += delta_theta;
-                robot_pose.angle = fmod(robot_pose.angle, 2 * M_PI);
+                robot_pose.angle = fmod(robot_pose.angle, 2 * Utils);
             }
   
   
@@ -703,7 +704,8 @@ namespace HYDRAlib
            (x_sgn_not_equal && starting_y_error_sgn == 0))
             sgn = -1;
 
-        if((m_reversed * sgn) == -1) {
+        if((m_reversed * sgn) == -1)
+        {
             if(target_angle_rad <= 0)
                 target_angle_rad += Utils::PI;
 

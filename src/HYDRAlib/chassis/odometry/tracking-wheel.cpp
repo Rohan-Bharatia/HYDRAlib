@@ -38,7 +38,8 @@ namespace HYDRAlib
         {
             double ticks_per_rev;
 
-            switch(motor.get_gearing()) {
+            switch(motor.get_gearing())
+            {
             case pros::E_MOTOR_GEAR_RED:
                 ticks_per_rev = 1800;
 
@@ -67,6 +68,7 @@ namespace HYDRAlib
         TrackingWheel::TrackingWheel(e_tracker_type type, pros::ADIEncoder encoder, double wheel_diameter, double offset, double ratio = 1)
         {
             set_constants(type, wheel_diameter, 360, offset, ratio, PROS_ERR);
+            Priv::motor_count += 0.5;
         }
 
         double TrackingWheel::get_value_tk()
