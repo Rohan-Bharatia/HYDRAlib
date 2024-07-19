@@ -9,7 +9,8 @@ HYDRAlib is a robotics programming library for Vex Robotics Competition robots, 
 This repository is under an [Gnu General Public License v3.0](https://github.com/Rohan-Bharatia/HYDRAlib/blob/main/LICENSE)
 
 ## Implementation
-To create an empty template of this project, download the GitHub repository, and store all files under a folder called ```HYDRAlib```, and then (outside of that file), create a file called ```main.cpp``` and copy/paste this code if you are in the Vex V5 Robotics Competition:
+To download this repository open [HYDRAlib.zip](https://github.com/Rohan-Bharatia/HYDRAlib/archive/refs/tags/HYDRAlib.zip)
+To create an empty template of this project, download the GitHub repository, and store all files/folders under a folder called ```HYDRAlib```, and then (outside of that folder), create a file called ```main.cpp``` and copy/paste this code if you are in the Vex V5 Robotics Competition:
 ```cpp
 #define _V5RC
 #include "HYDRAlib.h"
@@ -74,7 +75,7 @@ void opcontrol()
     }
 }
 ```
-<span color="red">**Warning**</span>: If these steps aren't followed exactly, then the code will not run properly.
+<span color="red">**Warning**</span>: If these steps aren't followed exactly, then the code will not run properly or at all.
 
 ## Documentation
 Read the ```/templates/v5``` or ```templates/vex U``` folders for information on how to use the HYDRAlib features to the best of their ability.
