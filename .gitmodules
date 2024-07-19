@@ -1,7 +1,7 @@
 [submodule, "dependencies/pros"]
-  path = "dependencies/pros"
-  url  = "https://github.com/purduesigbots/pros"
+  path = dependencies/pros
+  url  = https://github.com/purduesigbots/pros
 
 [submodule, "dependencies/OkapiLib"]
-  path = "lib/OkapiLib"
-  url  = "https://github.com/OkapiLib/OkapiLib"
+  path = dependencies/OkapiLib
+  url  = https://github.com/OkapiLib/OkapiLib
