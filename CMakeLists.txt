@@ -1,28 +1,51 @@
 cmake_minimum_required(VERSION 3.29.0)
+set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD_REQUIRED True)
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIED True)
-set(CMAKE_CXX_EXTENTIONS False)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_EXTENSIONS False)
+
+project(HYDRAlib VERSION 1.0.0 LANGUAGES C CXX)
+
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 
-project(HYDRAlib VERSION 1.0.0 LANGUAGES C CXX)
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/dependencies/toolchain.cmake")
+set(CMAKE_FIND_ROOT_PATH "${CMAKE_SOURCE_DIR}/dependencies")
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-file(GLOB_RECURSE SOURCES src/*.cpp)
-file(GLOB BIN "*.a")
+file(GLOB_RECURSE SOURCES src/*.cpp src/HYDRAlib/*.cpp)
 
-add_executable(HYDRAlib ${BIN})
+add_library(HYDRAlib STATIC ${SOURCES})
 
-set((CMAKE_TOOLCHAIN_FILE && CMAKE_FIND_ROOT_PATH) "${CMAKE_SOURCE_DIR}/dependencies/toolchain.cmake")
+file(GLOB BINARIES "firmware/*.a")
+
+add_executable(HYDRAlib_EXECUTABLE ${BINARIES})
+target_link_libraries(HYDRAlib_EXECUTABLE HYDRAlib)
 
 find_package(PKG_CONFIG REQUIRED)
 pkg_check_modules(PROS REQUIRED pros)
+pkg_check_modules(OKAPI REQUIRED okapi)
 
-add_definitions(-D_GNU_SOURCE)
-add_definitions(-D_V5RC)
-add_definitions(-D_VURC)
+add_definitions(-D_GNU_SOURCE -D_V5RC -D_VURC)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++23 -fPIC")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu23 -fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+install(TARGETS HYDRAlib HYDRAlib_EXECUTABLE
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin)
+
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include)
+
+set(CMAKE_VERBOSE_MAKEFILE ON)
