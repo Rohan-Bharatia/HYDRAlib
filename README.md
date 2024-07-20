@@ -80,6 +80,40 @@ void opcontrol()
     }
 }
 ```
+
+Or, if you are just testing or messing around with something, copy/paste this code:
+```cpp
+#define _TESTING
+#include "HYDRAlib.h"
+using namespace HYDRAlib;
+
+void initialize()
+{
+    set_default_movement_constants();
+}
+
+void disabled()
+{}
+
+void competition_initialize()
+{}
+
+void autonomous()
+{
+    AutonSelector::run_selected_auton();
+}
+
+void opcontrol()
+{
+    AutonSelector::disable_auton_selector();
+
+    while(running)
+    {
+        pros::delay(Utils::DELAY_TIME);
+    }
+}
+```
+
 <span color="red">**Warning**</span>: If these steps aren't followed exactly, then the code will not run properly or at all.
 
 ## Documentation
