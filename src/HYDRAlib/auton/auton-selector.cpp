@@ -31,14 +31,14 @@ namespace HYDRAlib
                                                                                                 run(auton_call)
     {}
 
-    void init(std::vector<Auton> autons) m_autons(autons), m_current_auton(0)
+    void AutonSelector::init(std::vector<Auton> autons) m_autons(autons), m_current_auton(0)
     {
         printf("Auton selector initialized with %i autons!\n", autons.size());
 
         pros::screen::touch_callback(handle_onscreen_buttons, pros::E_TOUCH_PRESSED);
     }
 
-    void run_selected_auton()
+    void AutonSelector::run_selected_auton()
     {
         if(is_empty() || locked)
             return;
@@ -50,7 +50,7 @@ namespace HYDRAlib
         autons[current_auton_page].run();
     }
 
-    void print_selected_auton()
+    void AutonSelector::print_selected_auton()
     {
         if(!enabled)
             return;
@@ -78,27 +78,27 @@ namespace HYDRAlib
         }
     }
 
-    bool is_empty()
+    bool AutonSelector::is_empty()
     {
         return m_autons.size() == 0;
     }
 
-    int get_current_auton_page()
+    int AutonSelector::get_current_auton_page()
     {
         return m_current_auton;
     }
 
-    std::string get_current_auton_name()
+    std::string AutonSelector::get_current_auton_name()
     {
         return m_autons[m_current_auton].name;
     }
 
-    std::string get_current_auton_description()
+    std::string AutonSelector::get_current_auton_description()
     {
         return m_autons[m_current_auton].name;
     }
 
-    void page_up()
+    void AutonSelector::page_up()
     {
         if(is_empty() || locked)
             return;
@@ -111,7 +111,7 @@ namespace HYDRAlib
         printf("Selected auton %i:  %s\n", current_auton_page + 1, autons[current_auton_page].name.c_str());
     }
 
-    void page_down()
+    void AutonSelector::page_down()
     {
         if(is_empty() || locked)
             return;
@@ -131,14 +131,14 @@ namespace HYDRAlib
     const int BUTTON_Y1       = 180;
     const int BUTTON_Y2       = 220;
 
-    void draw_onscreen_buttons()
+    void AutonSelector::draw_onscreen_buttons()
     {
         pros::screen::set_pen(Chassis::get_auton_selector_button_color());
         pros::screen::fill_rect(LEFT_BUTTON_X1, BUTTON_Y1, LEFT_BUTTON_X2, BUTTON_Y2); 
         pros::screen::fill_rect(RIGHT_BUTTON_X1, BUTTON_Y1, RIGHT_BUTTON_X2, BUTTON_Y2);
     }
 
-    void handle_onscreen_buttons()
+    void AutonSelector::handle_onscreen_buttons()
     {
         if(!enabled)
             return;
@@ -158,7 +158,7 @@ namespace HYDRAlib
     pros::ADIDigitalIn* page_down_limit_switch = nullptr;
     pros::Task limit_switch_task(limit_switch_task_func);
 
-    void limit_switch_initialize(pros::ADIDigitalIn* up_limit, pros::ADIDigitalIn* down_limit = nullptr)
+    void AutonSelector::limit_switch_initialize(pros::ADIDigitalIn* up_limit, pros::ADIDigitalIn* down_limit = nullptr)
     {
         while(true)
         {
@@ -174,7 +174,7 @@ namespace HYDRAlib
         }
     }
 
-    void limit_switch_task_func()
+    void AutonSelector::limit_switch_task_func()
     {
         printf("Initializing auton selector limit switch(es)...\n");
 
@@ -198,7 +198,7 @@ namespace HYDRAlib
 
     pros::Task controller_print_auton_task(controller_print_auton_task_func);
 
-    void controller_print_auton_task_func()
+    void AutonSelector::controller_print_auton_task_func()
     {
         while(true)
         {
@@ -217,7 +217,7 @@ namespace HYDRAlib
         }
     }
 
-    void enable_auton_selector()
+    void AutonSelector::enable_auton_selector()
     {
         if(enabled)
         {
@@ -233,7 +233,7 @@ namespace HYDRAlib
             printf("Enabled the auton selector!\n");
     }
 
-    void disable_auton_selector()
+    void AutonSelector::disable_auton_selector()
     {
         if(!enabled)
         {
@@ -249,7 +249,7 @@ namespace HYDRAlib
         printf("Disabled the auton selector!\n");
     }
 
-    bool is_enabled()
+    bool AutonSelector::is_enabled()
     {
         return enabled;
     }

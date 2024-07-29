@@ -29,18 +29,17 @@
 #include "dependencies/pros/include/pros/motor.hpp"
 #include "dependencies/pros/include/pros/imu.hpp"
 
-class fw : private Flywheel;
-class in : private Intake;
-
 namespace HYDRAlib
 {
     Chassis::Chassis(std::vector<int8_t> left_motor_ports, std::vector<int8_t> right_motor_ports,
-                     std::vector<int8_t> imu_sensor_ports, std::vector<TrackingWheel> trackers, bool disable_odom = false) :
+                     std::vector<int8_t> imu_sensor_ports, std::vector<TrackingWheel> trackers) :
         perpendicular_tracker(Tracking_Wheel::find_by_type(trackers, Tracking_Wheel::e_tracker_type::PERPENDICULAR, disable_odom)),
         left_tracker(Tracking_Wheel::find_by_type(trackers, Tracking_Wheel::e_tracker_type::LEFT, disable_odom)),
         right_tracker(Tracking_Wheel::find_by_type(trackers, Tracking_Wheel::e_tracker_type::RIGHT, disable_odom)),
         ODOM_TYPE(disable_odom ? e_odom_type::NONE : determine_odom_type())
     {
+        int i = 0;
+        disable_odom = imu_sensor_ports[i++] == NULL && trackers[i++] == NULL;
 
         for(int8_t port : imu_sensor_ports)
             imu_sensors.push_back(pros::IMU(port));
@@ -51,7 +50,7 @@ namespace HYDRAlib
             Priv::motor_count++;
         }
 
-        for(int8_t i : right_motor_ports)
+        for(int8_t port : right_motor_ports)
         {
             right_motors.push_back(pros::Motor(abs(port), Utils::is_reversed(port)));
             Priv::motor_count++;
@@ -249,7 +248,7 @@ namespace HYDRAlib
         Vertex current_vertex = Vertex(get_pose().x, get_pose().y);
         path.insert(path.begin(), current_vertex);
 
-        std::vector<PathVertex> trajectory = PathGeneration::trajectory<4>({PathGeneration::generate_path<4>({path, Utils::to_deg(Utils::normalize(get_pose().angle)), final_angle, tangent_magnitude}), v, a, w});
+        std::vector<Pose::Path> trajectory = PathGeneration::trajectory<4>({PathGeneration::generate_path<4>({path, Utils::to_deg(Utils::normalize(get_pose().angle)), final_angle, tangent_magnitude}), v, a, w});
 
         path_traverser.starting_position = (chassis.left_tracker.get_value_inches() + chassis.right_tracker.get_value_inches()) / 2;
         path_traverser.set_trajectory(trajectory);
@@ -262,7 +261,7 @@ namespace HYDRAlib
         Pose current_vertex = Pose(get_pose().x, get_pose().y, Utils::to_deg(Utils::normalize(get_pose().angle)));
         path.insert(path.begin(), current_vertex);
 
-        std::vector<PathVertex> trajectory = PathGeneration::trajectory<4>({PathGeneration::generate_path<2>({path, tangent_magnitude}), v, a, w});
+        std::vector<Pose::Path> trajectory = PathGeneration::trajectory<4>({PathGeneration::generate_path<2>({path, tangent_magnitude}), v, a, w});
 
         path_traverser.starting_position = (chassis.left_tracker.get_value_inches() + chassis.right_tracker.get_value_inches()) / 2;
         path_traverser.set_trajectory(trajectory);
@@ -276,18 +275,9 @@ namespace HYDRAlib
         m_active_brake_threshold = abs(threshold);
     }
 
-    void Chassis::set_joystick_curve(double scale, std::string curve_type = "red")
+    void Chassis::set_joystick_curve(double scale)
     {
         m_joystick_curve_scale = scale;
-
-        if(curve_type.compare("red") == 0 || curve_type.compare("blue") == 0)
-            m_joystick_curve_type = curve_type;
-        
-        else
-        {
-            printf("Tried to set the joystick curve type to a value other than \"red\" or \"blue\", so saving default value of \"red\" instead!\n");
-            m_joystick_curve_type = "red";
-        }
     }
 
     void Chassis::prefer_wheel_calculated_odom_angle(bool prefer_wheel_calculation)
@@ -997,11 +987,11 @@ namespace HYDRAlib
         pros::screen::print(pros::text_format_e_t::E_TEXT_MEDIUM, 7, "LF: %i   LC: %i   LB: %i",
                             static_cast<int>(chassis.left_motors.at(0).get_temperature()),  static_cast<int>(chassis.left_motors.at(1).get_temperature()),  static_cast<int>(chassis.left_motors.at(2).get_temperature()));
 
-        if(fw::exists)
+        if(Priv::fw::exists)
             pros::screen::print(pros::text_format_e_t::E_TEXT_MEDIUM, 8, "Fw: %i   B: %i%",
                                 static_cast<int>(flywheel.get_motors().at(0).get_temperature()), static_cast<int>(pros::battery::get_capacity()));
         
-        if(in::exists)
+        if(Priv::in::exists)
             pros::screen::print(pros::text_format_e_t::E_TEXT_MEDIUM, 8, "Iw: %i   B: %i%",
                                 static_cast<int>(intake.get_motors().at(0).get_temperature()),   static_cast<int>(pros::battery::get_capacity()));
     }
@@ -1011,18 +1001,7 @@ namespace HYDRAlib
         if(m_joystick_curve_scale == 0)
             return input;
 
-        if(m_joystick_curve_type.compare("red") == 0)
-            return ((powf(2.718, -(m_joystick_curve_scale / 10)) + powf(2.718, (fabs(input) - 127) / 10) * (1 - powf(2.718, -(m_joystick_curve_scale / 10)))) * input);
-
-        else if(m_joystick_curve_type.compare("blue") == 0)
-            return (powf(2.718, ((fabs(input) - 127) * m_joystick_curve_scale) / 1000) * input);
-
-        else
-        {
-            printf("Invalid joystick curve type!\n");
-
-            return input;
-        }
+        return ((powf(2.718, -(m_joystick_curve_scale / 10)) + powf(2.718, (fabs(input) - 127) / 10) * (1 - powf(2.718, -(m_joystick_curve_scale / 10)))) * input);
     }
 } // namespace HYDRAlib
 

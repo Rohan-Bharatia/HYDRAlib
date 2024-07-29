@@ -21,7 +21,7 @@
 // std
 #include <vector>
 
-#include "utils/vertex/path-vertex.hpp"
+#include "utils/vertex/pose.hpp"
 #include "utils/vertex/pose.hpp"
 
 namespace HYDRAlib
@@ -35,7 +35,7 @@ namespace HYDRAlib
         void calculate_curvature(Pose curr);
         void calculate_wheel_speeds(double track_width, double wheel_diameter);
 
-        std::vector<PathVertex> path;
+        std::vector<Pose::Path> path;
         Vertex lookahead_vertex;
         double lookahead_dist;
         double closest_index;

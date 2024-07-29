@@ -32,7 +32,7 @@ namespace HYDRAlib
     {
     public:
         Chassis(std::vector<uint8_t> left_motor_ports, std::vector<uint8_t> right_motor_ports,
-                std::vector<uint8_t> imu_sensor_ports, std::vector<TrackingWheel> trackers, bool disable_odom = false);
+                std::vector<uint8_t> imu_sensor_ports, std::vector<TrackingWheel> trackers);
         
         std::vector<pros::Motor> left_motors;
         std::vector<pros::Motor> right_motors;
@@ -90,7 +90,7 @@ namespace HYDRAlib
         void motion_profiling(std::vector<Pose> path, double tangent_magnitude, double v, double a, double w);
 
         void set_active_brake_power(double kP, int threshold);
-        void set_joystick_curve(double scale, std::string curve_type = "red");
+        void set_joystick_curve(double scale);
         void prefer_wheel_calculated_odom_angle(bool prefer_wheel_calculation);
         void tank_drive();
         void arcade_drive(bool flipped = false);
@@ -110,6 +110,8 @@ namespace HYDRAlib
         pros::Mutex drive_mutex;
     
     private:
+        bool disable_odom;
+        
         enum class e_odom_type
         {
             NONE,
@@ -134,7 +136,7 @@ namespace HYDRAlib
         int m_reversed;
 
         friend class MotionProfiling;
-        std::vector<PathVertex> m_trajectory;
+        std::vector<Pose::Path> m_trajectory;
         int m_current_index;
         
         std::atomic<bool> m_update_odom;
@@ -162,7 +164,6 @@ namespace HYDRAlib
         double m_right_brake_set_vertex;
 
         double m_joystick_curve_scale;
-        std::string m_joystick_curve_type = "red";
         double joystick_curve_function(double input);
     };
 } // namespace HYDRAlib

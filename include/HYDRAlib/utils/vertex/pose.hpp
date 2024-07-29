@@ -25,11 +25,27 @@ namespace HYDRAlib
 {
     class Pose : public Vertex
     {
-      public:
+    public:
         Pose();
         Pose(double x, double y, double angle);
-     
+
         double angle = 0;
+        
+        
+        class Path
+        {
+        public:
+            Path();
+            Path(Pose pose, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0);
+            Path(double x, double y, double angle, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0);
+        
+            Pose pose;
+            double curvature;
+            double acceleration;
+            double s;
+            double angular_velocity;
+            double velocity;
+        };
     };
 } // namespace HYDRAlib
 

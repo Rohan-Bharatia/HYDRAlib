@@ -128,7 +128,6 @@ namespace HYDRAlib::Utils
     double magnitude(Vertex p)
     {
         return std::sqrt(std::pow(p.x, 2) + std::pow(p.y, 2));
-
     }
 
     double dot_product(Vertex v1, Vertex v2)

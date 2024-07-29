@@ -19,11 +19,10 @@
 
 // std
 #include <iostream>
-#include <chrono>
 
-#define HYDRAlib_VERSION_MAJOR = 1
-#define HYDRAlib_VERSION_MINOR = 0
-#define HYDRAlib_VERSION_PATCH = 0
+#define HYDRAlib_VERSION_MAJOR 1
+#define HYDRAlib_VERSION_MINOR 0
+#define HYDRAlib_VERSION_PATCH 0
 
 #define PORT_1  01
 #define PORT_2  02
@@ -89,14 +88,14 @@
         }                  \
     } while(0)
 
-#define SAFE_DELETE_ARRAY(ptr)   \
-    do                           \
-    {                            \
-        if(ptr)                  \
-        {                        \
-            delete[] ptr;        \
-            ptr = nullptr;       \
-        }                        \
+#define SAFE_DELETE_ARRAY(ptr) \
+    do                         \
+    {                          \
+        if(ptr)                \
+        {                      \
+            delete[] ptr;      \
+            ptr = nullptr;     \
+        }                      \
     } while(0)
 
 #define CONCATENATE(arg1, arg2) arg1##arg2
@@ -110,9 +109,5 @@
 #define CHECK_BIT(value, bit)  ((value) & (1UL << (bit)))
 
 #define UNUSED(x) (void)(x)
-
-#define START_TIMER  auto start = std::chrono::high_resolution_clock::now()
-#define STOP_TIMER   auto stop = std::chrono::high_resolution_clock::now()
-#define ELAPSED_TIME std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count()
 
 #endif // _HYDRAlib_MACROS_h_

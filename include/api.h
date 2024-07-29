@@ -18,6 +18,8 @@
 #ifndef _PROS_API_h_
 #define _PROS_API_h_
 
+#include "main.h"
+
 #ifdef __cplusplus
 #include <cerrno>
 #include <cmath>
@@ -84,9 +86,17 @@ namespace HYDRAlib
 {
     bool running = true;
 
+    
+
     namespace Priv
     {
         uint8_t motor_count = 0;
+        
+        class fw : private Flywheel
+        {};
+
+        class in : private Intake
+        {};
     } // namespace Priv
 }
 

@@ -38,13 +38,13 @@ namespace HYDRAlib
 
         void run_ramsete_controller();
 
-        void set_trajectory(std::vector<PathVertex>& trajectory);
+        void set_trajectory(std::vector<Pose::Path>& trajectory);
 
         void update_current_vertex();
         void check_if_at_end();
         
-        std::vector<PathVertex> trajectory;
-        PathVertex current_vertex;
+        std::vector<Pose::Path> trajectory;
+        Pose::Path current_vertex;
         int current_index;
         double left_wheel_velocity, right_wheel_velocity;
         double delta_v, delta_w;

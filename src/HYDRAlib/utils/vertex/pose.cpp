@@ -23,10 +23,21 @@
 
 namespace HYDRAlib
 {
-    Pose() : Vertex(0, 0), angle(0)
+    Pose::Pose() : Vertex(0, 0), angle(0)
     {}
 
-    Pose(double x, double y, double angle) : Vertex(x, y), angle(angle);
+    Pose::Pose(double x, double y, double angle) : Vertex(x, y), angle(angle);
+    {}
+
+    Pose::Path::Path() : pose(Pose(0, 0, 0)), curvature(0), angular_velocity(0), s(0), velocity(0), acceleration(0)
+    {}
+
+    Pose::Path::Path(Pose pose, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0) :
+        pose(pose), curvature(curvature), angular_velocity(angular_velocity), s(s), velocity(velocity), acceleration(acceleration)
+    {}
+
+    Pose::Path::Path(double x, double y, double angle, double curvature, double angular_velocity, double s = 0, double velocity = 0, double acceleration = 0):
+        pose(Pose(x, y, angle)), curvature(curvature), angular_velocity(angular_velocity), s(s), velocity(velocity), acceleration(acceleration)
     {}
 } // namespace HYDRAlib
 

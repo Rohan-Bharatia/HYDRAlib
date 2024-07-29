@@ -22,7 +22,7 @@
 #include <vector>
 
 #include "main.h"
-#include "utils/vertex/path-vertex.hpp"
+#include "utils/vertex/pose.hpp"
 #include "utils/simple-moving-avg.hpp"
 
 namespace HYDRAlib
@@ -104,7 +104,7 @@ namespace HYDRAlib
         current_vertex.angular_velocity = angular_vel;
     }
 
-    void MotionProfiling::set_trajectory(std::vector<PathVertex>& trajectory) : trajectory(trajectory), current_index(0),
+    void MotionProfiling::set_trajectory(std::vector<Pose::Path>& trajectory) : trajectory(trajectory), current_index(0),
                                                                                 starting_position((chassis.left_tracker.get_value_inches() + chassis.right_tracker.get_value_inches()) / 2),
                                                                                 at_end(false)
     {

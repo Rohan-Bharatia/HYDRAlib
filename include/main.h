@@ -31,14 +31,13 @@
 #include "chassis/motion/pure-pursuit.hpp"
 #include "chassis/odometry/tracking-wheel.hpp"
 
-#include "path-generation/path-generation.hpp"
 #include "path-generation/bezier.hpp"
+#include "path-generation/path-generation.hpp"
 
 #include "subsystems/four-bar.hpp"
 #include "subsystems/intake.hpp"
 #include "subsystems/piston.hpp"
 
-#include "utils/vertex/path-vertex.hpp"
 #include "utils/vertex/vertex.hpp"
 #include "utils/vertex/pose.hpp"
 #include "utils/PID.hpp"

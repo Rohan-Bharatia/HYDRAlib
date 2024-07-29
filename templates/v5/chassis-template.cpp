@@ -13,7 +13,7 @@ void initialize()
 {
     set_default_movement_constants();
 
-    chassis.set_drivestick_curve(5, "red");
+    chassis.set_drivestick_curve(5);
     chassis.set_active_brake_power(0, 10);
     chassis.prefer_wheel_calculated_odom_angle(false);
 

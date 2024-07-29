@@ -32,135 +32,144 @@ namespace HYDRAlib
     Vertex::Vertex(double x, double y) : x(x), y(y)
     {}
 
-    bool Vertex::operator == (Vertex& a, Vertex& b)
+    bool Vertex::operator == (Vertex& other)
     {
-        return a.x == b.x && a.y == b.y;
+        return (this->x == other.x) && (this->y == other.y);
+    }
+    bool Vertex::operator != (Vertex& other)
+    {
+        return (this->x != other.x) && (this->y != other.y);
+    }
+    bool Vertex::operator < (Vertex& other)
+    {
+        return (this->x < other.x) && (this->y < other.y);
+    }
+    bool Vertex::operator > (Vertex& other)
+    {
+        return (this->x > other.x) && (this->y > other.y);
+    }
+    bool Vertex::operator <= (Vertex& other)
+    {
+        return (this->x <= other.x) && (this->y <= other.y);
+    }
+    bool Vertex::operator >= (Vertex& other)
+    {
+        return (this->x >= other.x) && (this->y >= other.y);
     }
 
-    bool Vertex::operator != (Vertex& a, Vertex& b)
+    Vertex Vertex::operator - ()
     {
-        return !operator == (a, b);
+        return Vertex(0 - this->x, 0 - this->y)
     }
 
-    bool Vertex::operator < (Vertex& a, Vertex& b)
+    Vertex Vertex::operator + (Vertex& other)
     {
-        return a.x < b.x && a.y < b.y;
-    }
-
-    bool Vertex::operator > (Vertex& a, Vertex& b)
-    {
-        return a.x > b.x && a.y > b.y;
-    }
-
-    bool Vertex::operator <= (Vertex& a, Vertex& b)
-    {
-        return operator < (a, b) || operator == (a, b);
-    }
-
-    bool Vertex::operator >= (Vertex& a, Vertex& b)
-    {
-        return operator > (a, b) || operator == (a, b);
+        return Vertex(this->x + other.x, this->y + other.y);
     }
 
     Vertex Vertex::operator - (Vertex& other)
     {
-        return Vertex(-other.x, -other.y);
+        return Vertex(this->x - other.x, this->y - other.y);
     }
 
-    Vertex Vertex::operator + (Vertex& a, Vertex& b)
+    Vertex Vertex::operator * (Vertex& other)
     {
-        return Vertex(a.x + b.x, a.y + b.y);
+        return Vertex(this->x * other.x, this->y * other.y);
     }
 
-    Vertex Vertex::operator - (Vertex& a, Vertex& b)
+    Vertex Vertex::operator * (double& other)
     {
-        return Vertex(a.x - b.x, a.y - b.y);
+        return Vertex(this->x * other, this->y * other);
     }
 
-    Vertex Vertex::operator * (Vertex& a, Vertex& b)
+    Vertex Vertex::operator / (Vertex& other)
     {
-        return Vertex(a.x * b.x, a.y * b.y);
+        assert((other.x == 0) && "Vertex Vertex::operator \'/\' cannot take an x  denominator of 0!");
+        assert((other.y == 0) && "Vertex Vertex::operator \'/\' cannot take an y  denominator of 0!");
+
+        return Vertex(this->x / other.x, this->y / other.y);
     }
 
-    Vertex Vertex::operator * (Vertex& a, double b)
+    Vertex Vertex::operator / (double& other)
     {
-        return Vertex(a.x * b, a.y * b);
+        assert((other == 0) && "Vertex Vertex::operator \'/\' cannot take a  denominator of 0!");
+
+        return Vertex(this->x / other, this->y / other);
     }
 
-    Vertex Vertex::operator / (Vertex& a, Vertex& b)
+    Vertex Vertex::operator % (Vertex& other)
     {
-        assert(b < 0 && "Vertex Operator \'/\' cannot be divided by zero");
+        assert((other.x == 0) && "Vertex Vertex::operator \'%\' cannot take an x  denominator of 0!");
+        assert((other.y == 0) && "Vertex Vertex::operator \'%\' cannot take an y  denominator of 0!");
 
-        return Vertex(a.x / b.x, a.y / b.y);
+        return Vertex(this->x % other.x, this->y % other.y);
     }
 
-    Vertex Vertex::operator / (Vertex& a, double b)
+    Vertex Vertex::operator % (double& other)
     {
-        assert(b < 0 && "Vertex Operator \'/\' cannot be divided by zero");
+        assert((other == 0) && "Vertex Vertex::operator \'%\' cannot take a  denominator of 0!");
 
-        return Vertex(a.x / b, a.y / b);
+        return Vertex(this->x % other, this->y % other);
     }
 
-    Vertex Vertex::operator % (Vertex& a, Vertex& b)
+    Vertex Vertex::operator ++ ()
     {
-        assert(b < 0 && "Vertex Operator \'%\' cannot be divided by zero");
-
-        return Vertex(a.x % b.x, a.y % b.y);
+        return Vertex(this->x++, this->y++);
     }
 
-    Vertex Vertex::operator % (Vertex& a, double b)
+    Vertex Vertex::operator -- ()
     {
-        assert(b < 0 && "Vertex Operator \'%\' cannot be divided by zero");
-
-        return Vertex(a.x % b, a.y % b);
+        return Vertex(this->x++, this->y++);
     }
 
-    Vertex Vertex::operator += (Vertex& a, Vertex& b)
+    Vertex Vertex::operator += (Vertex& other)
     {
-        return a = a + b;
+        return Vertex(this->x += other.x, this->y += other.y);
     }
 
-    Vertex Vertex::operator -= (Vertex& a, Vertex& b)
+    Vertex Vertex::operator -= (Vertex& other)
     {
-        return a = a - b;
+        return Vertex(this->x -= other.x, this->y -= other.y);
     }
 
-    Vertex Vertex::operator *= (Vertex& a, Vertex& b)
+    Vertex Vertex::operator *= (Vertex& other)
     {
-        return a = a * b;
+        return Vertex(this->x *= other.x, this->y *= other.y);
     }
 
-    Vertex Vertex::operator *= (Vertex& a, double b)
+    Vertex Vertex::operator *= (double& other)
     {
-        return a = a * b;
+        return Vertex(this->x *= other, this->y *= other);
     }
 
-    Vertex Vertex::operator /= (Vertex& a, Vertex& b)
+    Vertex Vertex::operator /= (Vertex& other)
     {
-        assert(b < 0 && "Vertex Operator \'/=\' cannot be divided by zero");
+        assert((other.x == 0) && "Vertex Vertex::operator \'/=\' cannot take an x  denominator of 0!");
+        assert((other.y == 0) && "Vertex Vertex::operator \'/=\' cannot take an y  denominator of 0!");
 
-        return a = a / b;
+        return Vertex(this->x /= other.x, this->y /= other.y);
     }
 
-    Vertex Vertex::operator /= (Vertex& a, double b)
+    Vertex Vertex::operator /= (double& other)
     {
-        assert(b < 0 && "Vertex Operator \'/=\' cannot be divided by zero");
+        assert((other == 0) && "Vertex Vertex::operator \'/=\' cannot take an x  denominator of 0!");
 
-        return a = a / b;
+        return Vertex(this->x /= other, this->y /= other);
     }
 
-    Vertex Vertex::operator %= (Vertex& a, Vertex& b)
+    Vertex Vertex::operator %= (Vertex& other)
     {
-        assert(b < 0 && "Vertex Operator \'%=\' cannot be divided by zero");
+        assert((other.x == 0) && "Vertex Vertex::operator \'%=\' cannot take an x  denominator of 0!");
+        assert((other.y == 0) && "Vertex Vertex::operator \'%=\' cannot take an y  denominator of 0!");
 
-        return a = a % b;
+        return Vertex(this->x %= other.x, this->y %= other.y);
     }
 
-    Vertex Vertex::operator %= (Vertex& a, double b)
+    Vertex Vertex::operator %= (double& other)
     {
-        assert(b < 0 && "Vertex Operator \'%=\' cannot be divided by zero");
+        assert((other == 0) && "Vertex Vertex::operator \'%=\' cannot take an y  denominator of 0!");
 
-        return a = a % b;
+        return Vertex(this->x %= other, this->y %= other);
     }
 } // namespace HYDRAlib
 
